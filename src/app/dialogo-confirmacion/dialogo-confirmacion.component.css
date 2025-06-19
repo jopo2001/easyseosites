@@ -1,0 +1,54 @@
+.dialog-title {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.dialog-content {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 24px;
+}
+
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+
+.no-button, .yes-button{
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 18px;
+    padding: 14px 28px;
+    font-size: 15px;
+    margin-left: 12px;
+    
+}
+
+.no-button {
+    background-color: #fff;
+    color: #ff5722; /* naranja */
+    border: 2px solid #ff5722; /* naranja */
+}
+
+.no-button:hover {
+    background-color: #dd9e8a; /* naranja */
+    color: #fff;
+}
+
+.yes-button {
+    background-color: #ff5722; /* naranja */
+    color: #fff;
+    border: 2px solid #ff5722; /* naranja */
+}
+
+.yes-button:hover {
+    background-color: #ffffff; 
+    color: black;
+}
+
+.containerP{
+    padding: 15px;
+}

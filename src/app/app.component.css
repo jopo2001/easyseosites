@@ -1,0 +1,149 @@
+.contenedor-padre {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+  }
+  
+  .icon-m{
+    color: #6e707a; /*color de iconos de menu principal*/
+    margin-right: 10px;
+  }
+  
+  h1{
+    font-weight: bold;
+  }
+  
+  .barra {
+    background-color: #c71f1ff6 ;
+    color: white;
+    padding: 0.5rem 0.5rem; /* Reduce el tamaño del navbar */
+  
+  }
+  .barra .navbar-toggler {
+    border: none;
+    font-size: 1.2rem; /* Ajusta el tamaño del icono del menú */
+  }
+  
+  /*
+  .barra2 {
+    background-color: #167dbe ;
+    color: white;
+    font-size: 1rem;
+    transform: skewX(-10deg);
+    text-transform: uppercase; 
+    display: flex;
+    align-items: center;
+  }*/
+  
+  /*Nuevos Estilos*/
+  .dropdown-item {
+    cursor: pointer;
+  }
+  
+  
+  .lista-gral {
+    color: black;
+  }
+  
+  .icon-gral {
+    color: rgb(255, 0, 0);
+  }
+  
+  .contenido {
+    flex: 1 1 auto;
+  }
+  
+  .padding-10 {
+    padding: 5px;
+  }
+  
+  .list-item-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .list-item-container mat-icon {
+    margin-right: 8px;
+    /* Ajusta el espacio entre el ícono y el texto según sea necesario */
+  }
+  
+  .menu-lateral {
+    width: 250px;
+  }
+  
+  
+  .menu-subtones{ /*Definir longitud de menu lateral*/
+    width: 250px;
+  }
+  
+  h2{
+    margin-left: 10px;
+  }
+  
+  span{
+    font-size: 15px;
+  }
+  
+  
+  
+  @media only screen and (max-width: 1366px) {
+    h2{
+      font-size: 18px;
+    }
+    .menu-lateral {
+      font-size: 13px;
+      width: 190px;
+    }
+    .menu-subtones{ /*Definir longitud de menu lateral*/
+      width: 190px;
+    
+    }
+    span{
+      font-size: 13px;
+    }
+  
+  }
+  
+  /* Media query para pantallas más pequeñas, como teléfonos */
+  @media screen and (max-width: 600px) {
+    .mat-sidenav {
+      width: 100%;
+    }
+  
+    /* Reducir tamaño de texto en pantallas pequeñas */
+    .mat-toolbar-row span {
+      font-size: 14px;
+    }
+  
+    .mat-list-item {
+      font-size: 14px;
+    }
+  
+  
+    /* Estilos adicionales para mejorar la experiencia en pantallas pequeñas */
+    .mat-toolbar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .mat-toolbar-row span {
+      flex-grow: 1;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  
+    .mat-nav-list {
+      width: 100%;
+    }
+  
+    .mat-list-item {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      text-align: center;
+    }
+  }
+  

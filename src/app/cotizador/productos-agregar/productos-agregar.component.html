@@ -1,0 +1,106 @@
+<div class="p-4 bg-white rounded shadow-sm border">
+  <h2 class="mb-4 text-dark fw-bold border-bottom pb-2">
+    <i class="fas fa-box-open me-2 text-danger"></i> Crear Nuevo Producto
+  </h2>
+
+  <form (ngSubmit)="guardarProducto()" #productoForm="ngForm">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Tipo</label>
+        <select class="form-select" [(ngModel)]="nuevoProducto.tipo" name="tipo" required>
+          <option value="" disabled selected>Seleccione un tipo</option>
+          <option value="Lona">Lona</option>
+          <option value="Aluminio">Aluminio</option>
+          <option value="Policarbonato">Policarbonato</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" [(ngModel)]="nuevoProducto.nombre" placeholder="Ingresa Nombre" name="nombre" required />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">¿Puede tener motor?</label>
+        <select class="form-select" [(ngModel)]="nuevoProducto.motor" name="motor">
+          <option value="si">Sí</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <div class="col-md-6" *ngIf="nuevoProducto.motor === 'si'">
+        <label class="form-label">Costo Motor</label>
+        <input type="number" class="form-control" [(ngModel)]="nuevoProducto.costo_motor" name="costo_motor" />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">M² Mínimo</label>
+        <input type="number" class="form-control" [(ngModel)]="nuevoProducto.min_metro_cuadrado" name="min_metro_cuadrado" required />
+      </div>
+    </div>
+
+    <!-- Limites -->
+    <div class="border rounded p-3 mb-4 bg-light">
+      <h5 class="mb-3 text-secondary">Límites</h5>
+      <div class="row">
+        <div class="col">
+          <label>Ancho Mín.</label>
+          <input type="number" class="form-control" [(ngModel)]="limitesNProducto.ancho_min" name="ancho_min" required />
+        </div>
+        <div class="col">
+          <label>Ancho Máx.</label>
+          <input type="number" class="form-control" [(ngModel)]="limitesNProducto.ancho_max" name="ancho_max" required />
+        </div>
+        <div class="col">
+          <label>Alto Mín.</label>
+          <input type="number" class="form-control" [(ngModel)]="limitesNProducto.alto_min" name="alto_min" required />
+        </div>
+        <div class="col">
+          <label>Alto Máx.</label>
+          <input type="number" class="form-control" [(ngModel)]="limitesNProducto.alto_max" name="alto_max" required />
+        </div>
+      </div>
+    </div>
+
+    <!-- Colores -->
+    <div class="border rounded p-3 mb-4 bg-light">
+      <h5 class="mb-3 text-secondary">Colores Disponibles</h5>
+      <div class="mb-2" *ngFor="let color of colores; let i = index">
+        <div class="input-group">
+          <input [(ngModel)]="color.color" name="color{{i}}" class="form-control" placeholder="Nombre del color" /><!--colores[i]-->
+          <button type="button" class="btn btn-outline-danger" (click)="eliminarColor(i)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+      
+      <button type="button" class="btn btn-sm btn-outline-primary" (click)="agregarColor()">
+        <i class="fas fa-plus"></i> Agregar color
+      </button>
+    </div>
+
+    <!-- Color Default -->
+  <div class="mb-4">
+  <label class="form-label">Color por Defecto</label>
+  <select class="form-select" [(ngModel)]="nuevoProducto.color_default" name="color_default" required>
+    <option disabled selected value="">Selecciona opción</option>
+    <option *ngFor="let color of colores" [value]="color.color">{{ color.color }}</option>
+  </select>
+</div>
+
+
+   <div class="text-end d-flex justify-content-end">
+  <a routerLink="/productos" class="btn btn-outline-secondary me-2">
+    <i class="fas fa-arrow-left me-1"></i> Volver a Productos
+  </a>
+
+  <button class="btn btn-success" type="submit" [disabled]="!productoForm.valid">
+    <i class="fas fa-check-circle me-1"></i> Guardar Producto
+  </button>
+</div>
+
+  </form>
+</div>

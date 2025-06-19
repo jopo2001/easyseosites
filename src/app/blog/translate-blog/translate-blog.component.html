@@ -1,0 +1,125 @@
+<div class="p-4 bg-white rounded shadow-sm border">
+    <h2 class="mb-4 text-dark fw-bold border-bottom pb-2">
+        <i class="fas fa-globe me-2 text-success"></i> Traducir Blog <span class="text-muted">ES → EN</span>
+    </h2>
+
+    <form (ngSubmit)="guardarTraduccion()" *ngIf="blogES">
+        <div class="row">
+            <!-- Columna Español -->
+            <div class="col-md-6 border-end">
+                <h3 class="text-secondary mb-3"><i class="fas fa-language me-1"></i> Español</h3>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Slug (url)</label>
+                    <input type="text" class="form-control" [value]="blogES.url" disabled>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Meta Título</label>
+                    <input type="text" class="form-control" [value]="blogES.title" disabled>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Meta Descripción</label>
+                    <textarea class="form-control" [value]="blogES.description" rows="3" disabled></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">H1</label>
+                    <input type="text" class="form-control" [value]="blogES.h1" disabled>
+                </div>
+
+
+
+
+                <div class="mb-3" *ngIf="+blogES.status !== 3">
+                    <label class="form-label fw-bold">Resumen</label>
+                    <textarea class="form-control" [value]="blogES.resumen" rows="2" disabled></textarea>
+                </div>
+
+                <div class="mb-3" ><!--*ngIf="+blogES.status !== 3"-->
+                    <label class="form-label fw-bold" >Contenido</label>
+                    <div class="bg-light border rounded p-3"
+                        style="min-height: 200px; max-height: 500px; overflow-y: auto;" [innerHTML]="blogES.body">
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Columna Inglés -->
+            <div class="col-md-6">
+                <h3 class="text-secondary mb-3"><i class="fas fa-flag-usa me-1"></i> Inglés</h3>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Slug (url)</label>
+                    <input type="text" class="form-control" [(ngModel)]="blogEN.url" name="url" required  [disabled]="blogEN.status === 3">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Meta Título</label>
+                    <input type="text" class="form-control" [(ngModel)]="blogEN.title" name="title" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Meta Descripción</label>
+                    <textarea class="form-control" [(ngModel)]="blogEN.description" name="description"
+                        rows="3"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">H1</label>
+                    <input type="text" class="form-control" [(ngModel)]="blogEN.h1" name="h1" required>
+                </div>
+
+                <div class="mb-3" *ngIf="+blogES.status !== 3">
+                    <label class="form-label fw-bold">Resumen</label>
+                    <textarea class="form-control" [(ngModel)]="blogEN.resumen" name="resumen" rows="2"></textarea>
+                </div>
+
+                <div class="mb-3" > <!--*ngIf="+blogES.status !== 3"-->
+                    <label class="form-label fw-bold">Contenido</label>
+                    <div name="div-main" style="margin-top: 10px;" >
+                        <editor [(ngModel)]="blogEN.body" name="editor" [init]="{
+          height: 500,
+          menubar: true,
+          plugins: [
+          'advlist', 'anchor', 'autolink', 'autosave', 'code', 'codesample', 'directionality', 
+          'emoticons', 'fullscreen', 'help', 'image', 'importcss', 'insertdatetime', 
+          'link', 'lists', 'media', 'nonbreaking', 'pagebreak', 'preview', 'save', 
+          'searchreplace', 'table', 'visualblocks', 'visualchars', 'wordcount'
+        ],
+        toolbar:
+        'undo redo | bold italic underline strikethrough | fontsizeselect formatselect | ' + 
+        'alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | ' + 
+        'forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | ' + 
+        'charmap emoticons | fullscreen preview print | insertfile image media template link anchor codesample | ' + 
+        'ltr rtl | visualblocks visualchars template pagebreak'
+    ,  
+    images_upload_url: 'https://admin.stormcatcher.com.mx/blog/conex/upload.php',
+    automatic_uploads: true,
+          base_url: '/assets/tinymce',
+          suffix: '.min',
+          content_css: '/assets/tinymce/skins/content/default/content.min.css',
+          skin_url: '/assets/tinymce/skins/ui/oxide',
+          skin: 'oxide',
+          license: 'GPL',
+          license_key: 'gpl' 
+        }"></editor>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón guardar -->
+        <div class="d-flex justify-content-end pt-3 border-top mt-4">
+            <button class="btn btn-warning me-2" routerLink="/lista-blogs-en">
+            <i class="fa-solid fa-arrow-rotate-left"></i> Volver a Lista
+          </button>
+
+            <button class="btn btn-success">
+                <i class="fas fa-save me-1"></i> Guardar Traducción
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,17 @@
+.card-title i {
+  font-size: 1.4rem;
+  vertical-align: middle;
+}
+
+.input-group-text {
+  border-right: none;
+}
+
+input.form-control {
+  border-left: none;
+  box-shadow: none;
+}
+
+.btn-group-sm .btn i {
+  font-size: 0.85rem;
+}
