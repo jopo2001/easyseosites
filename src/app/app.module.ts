@@ -19,12 +19,6 @@ import { EditarBlogComponent } from './blog/editar-blog/editar-blog.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { LoginComponent } from './login/login.component';
 import { GaleriaComponent } from './blog/galeria/galeria.component';
-import { RegionesComponent } from './cotizador/regiones/regiones.component';
-import { ProductosComponent } from './cotizador/productos/productos.component';
-import { ProductosEditarComponent } from './cotizador/productos-editar/productos-editar.component';
-import { PreciosComponent } from './cotizador/precios/precios.component';
-import { PreciosEditarComponent } from './cotizador/precios-editar/precios-editar.component';
-import { ProductosAgregarComponent } from './cotizador/productos-agregar/productos-agregar.component';
 import { ListaBlogsEnComponent } from './blog/lista-blogs-en/lista-blogs-en.component';
 import { TranslateBlogComponent } from './blog/translate-blog/translate-blog.component';
 
@@ -38,12 +32,6 @@ import { TranslateBlogComponent } from './blog/translate-blog/translate-blog.com
     EditarBlogComponent,
     LoginComponent,
     GaleriaComponent,
-    RegionesComponent,
-    ProductosComponent,
-    ProductosEditarComponent,
-    PreciosComponent,
-    PreciosEditarComponent,
-    ProductosAgregarComponent,
     ListaBlogsEnComponent,
     TranslateBlogComponent,
   ],

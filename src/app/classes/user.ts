@@ -12,16 +12,3 @@ export class User {
     ) { }
 
 }
-/*
-tome fecha sin la hora:
-public fecha_alta: Date;
-
-constructor(
-    // Otros parámetros...
-    fecha_alta: Date,
-    // Otros parámetros...
-) {
-    this.fecha_alta = new Date(fecha_alta.toDateString()); // Conserva solo la fecha, sin la hora
-}
-
-*/
