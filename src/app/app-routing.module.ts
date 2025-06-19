@@ -6,6 +6,9 @@ import { EditarBlogComponent } from './blog/editar-blog/editar-blog.component';
 import { LoginComponent } from './login/login.component';
 import { ListaBlogsEnComponent } from './blog/lista-blogs-en/lista-blogs-en.component';
 import { TranslateBlogComponent } from './blog/translate-blog/translate-blog.component';
+import { HeaderComponent } from './esqueletos/header/header.component';
+import { FooterComponent } from './esqueletos/footer/footer.component';
+import { EsqueletosComponent } from './esqueletos/esqueletos.component';
 
 const routes: Routes = [
   { path: "", component: ListaBlogsComponent }, //Temporal
@@ -17,6 +20,7 @@ const routes: Routes = [
   { path: "editar-blog/:id", component: EditarBlogComponent },
   { path: "lista-blogs-en", component: ListaBlogsEnComponent},
   { path: "translate-blog/:id", component: TranslateBlogComponent },
+  { path: "esqueletos", component: EsqueletosComponent },
 
   //{ path: "**", redirectTo: "" }
 ];

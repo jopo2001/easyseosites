@@ -21,6 +21,9 @@ import { LoginComponent } from './login/login.component';
 import { GaleriaComponent } from './blog/galeria/galeria.component';
 import { ListaBlogsEnComponent } from './blog/lista-blogs-en/lista-blogs-en.component';
 import { TranslateBlogComponent } from './blog/translate-blog/translate-blog.component';
+import { HeaderComponent } from './esqueletos/header/header.component';
+import { FooterComponent } from './esqueletos/footer/footer.component';
+import { EsqueletosComponent } from './esqueletos/esqueletos.component';
 
 
 
@@ -34,6 +37,9 @@ import { TranslateBlogComponent } from './blog/translate-blog/translate-blog.com
     GaleriaComponent,
     ListaBlogsEnComponent,
     TranslateBlogComponent,
+    HeaderComponent,
+    FooterComponent,
+    EsqueletosComponent,
   ],
   imports: [
     BrowserModule,

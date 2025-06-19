@@ -1,0 +1,17 @@
+.li-ph {
+    
+}
+
+.nav-ph {
+    
+}
+
+.logo-ph {
+    height: 70px;
+}
+
+@media (max-width: 768px) {
+    .logo-ph {
+        height: 40px;
+    }
+}
