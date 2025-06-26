@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // Guardar la última URL antes de cada navegación
-    this.router.events
+    /* this.router.events 
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         if (!event.url.includes('/login')) {
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
 
         // Mostrar/ocultar toolbar
         this.showToolbar = !(event.url === '/' || event.url.includes('/login') || (this.userId === '' || this.userId === null));
-      });
+      }); 
 
     // Guardar la URL anterior (por si se quiere usar en otros contextos)
     this.router.events
@@ -68,8 +68,8 @@ export class AppComponent implements OnInit {
       } else {
         this.router.navigate(['/lista-blogs']); // Ruta por defecto si no hay ruta previa
       }
-    }
-  }
+    } */
+  } 
 
   ngAfterViewInit(): void {
     this.offcanvasInstance = new bootstrap.Offcanvas(this.sidebarRef.nativeElement);
