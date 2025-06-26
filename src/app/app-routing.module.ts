@@ -6,17 +6,24 @@ import { EditarBlogComponent } from './blog/editar-blog/editar-blog.component';
 import { LoginComponent } from './login/login.component';
 import { ListaBlogsEnComponent } from './blog/lista-blogs-en/lista-blogs-en.component';
 import { TranslateBlogComponent } from './blog/translate-blog/translate-blog.component';
+import { HeaderMainComponent } from './header/header-main/header-main.component';
+import { HeaderMainAgregarComponent } from './header/header-main-agregar/header-main-agregar.component';
+
+import { CreateLPComponent } from './landing_pages/create-lp/create-lp.component';
+import { EditarLPComponent } from './landing_pages/editar-lp/editar-lp.component';
+import { ListaLPComponent } from './landing_pages/lista-lp/lista-lp.component';
 
 const routes: Routes = [
   { path: "", component: ListaBlogsComponent }, //Temporal
   { path: "login", component: LoginComponent },
 
-
-  { path: "crear-blog", component: CreateBlogComponent },
-  { path: "lista-blogs", component: ListaBlogsComponent },
-  { path: "editar-blog/:id", component: EditarBlogComponent },
-  { path: "lista-blogs-en", component: ListaBlogsEnComponent},
-  { path: "translate-blog/:id", component: TranslateBlogComponent },
+  { path: "crear-lp", component: CreateLPComponent },
+  { path: "lista-lp", component: ListaLPComponent },
+  { path: "editar-lp/:id", component: EditarLPComponent },
+  /*{ path: "lista-blogs-en", component: ListaBlogsEnComponent},
+  { path: "translate-blog/:id", component: TranslateBlogComponent },*/
+  { path: "header/configuracion", component: HeaderMainComponent },
+  { path: "header/agregar-enlace", component: HeaderMainAgregarComponent }
 
   //{ path: "**", redirectTo: "" }
 ];

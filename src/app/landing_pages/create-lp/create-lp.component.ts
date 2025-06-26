@@ -6,13 +6,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { AdminService } from '../../servicios/admin.service';
 
 import 'tinymce/tinymce.min.js';  // Importa TinyMCE directamente
+import { PageService } from '../../servicios/pages.service';
 
 @Component({
-  selector: 'app-create-blog',
-  templateUrl: './create-blog.component.html',
-  styleUrl: './create-blog.component.css'
+  selector: 'app-create-lp',
+  templateUrl: './create-lp.component.html',
+  styleUrl: './create-lp.component.css',
+  standalone: false
 })
-export class CreateBlogComponent implements OnInit {
+export class CreateLPComponent implements OnInit {
   public blogModel: LP_ES = new LP_ES("", "", 0, "", "", "", "", 0, "", "", "", "", "", "", "", "", "", "", "", 0);
   public editorContent = `<p>Escribe tu contenido aquí...</p>`;
 
@@ -37,6 +39,7 @@ export class CreateBlogComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private adminService: AdminService,
+    private pageService: PageService,
     private snackBar: MatSnackBar,
     private dialogo: MatDialog,
   ) { }
@@ -75,47 +78,38 @@ export class CreateBlogComponent implements OnInit {
     this.router.navigate(['/lista-blogs']);
   }
 
-  onSubmit() {
-    /*if (this.ultimoBlog.id !== 1) {
-      this.ultimoBlog.id!++;
-    }
-*/
-    const formDataToSend = new FormData();
-    if (this.fileToUpload) {
-      formDataToSend.append('fileInput1', this.fileToUpload || '');
-      formDataToSend.append('fileInput2', this.fileToUpload2 || '');
+ onSubmit() {
+  const formDataToSend = new FormData();
 
-
-
-      if (this.blogModel.url !== '' && this.blogModel.h1 !== '') {
-        this.adminService.addBlog(2, this.blogModel, formDataToSend).subscribe(
-          () => {
-            /* this.slugInput.nativeElement.style.border = '1px solid #ccc';
-             this.h1Input.nativeElement.style.border = '1px solid #ccc';
-             this.fileUploadInput.nativeElement.style.border = '1px solid #ccc';
-             this.fileUploadInput.nativeElement.value = '';*/
-            this.snackBar.open('Blog Generado Exitosamente', 'Cerrar', { duration: 3000 });
-            this.router.navigate(['/lista-blogs']);
-
-            //this.router.navigate(['/editar-contenido', this.ultimoBlog.id]);
-          },
-          error => {
-            console.error('Error al Actualizar Blog:', error);
-            this.snackBar.open('Faltan Campos por Rellenar', 'Cerrar', { duration: 3000 });
-          }
-        );
-      } else {
-        /*this.slugInput.nativeElement.style.border = '2px solid red';
-        this.h1Input.nativeElement.style.border = '2px solid red';*/
-        this.snackBar.open('Rellena los campos solicitados', 'Cerrar', { duration: 4000 });
-
-      }
-
-    } else {
-      this.fileUploadInput.nativeElement.style.border = '2px solid red';
-      this.snackBar.open('Primero Carga un Imagen CARD', 'Cerrar', { duration: 5000 });
-    }
+  // Agrega archivos si están cargados
+  if (this.fileToUpload) {
+    formDataToSend.append('fileInput1', this.fileToUpload);
   }
+  if (this.fileToUpload2) {
+    formDataToSend.append('fileInput2', this.fileToUpload2);
+  }
+
+  // Agrega el objeto de datos como JSON
+  formDataToSend.append('PageEs', JSON.stringify(this.blogModel));
+
+  // Validación básica antes de enviar
+  if (this.blogModel.url !== '' && this.blogModel.h1 !== '') {
+    this.pageService.createPageES(formDataToSend).subscribe(
+      () => {
+        this.snackBar.open('Landing generada exitosamente', 'Cerrar', { duration: 3000 });
+        this.router.navigate(['/lista-lp']);
+      },
+      error => {
+        console.error('Error al crear la LP:', error);
+        this.snackBar.open('Faltan campos por rellenar o error en el servidor', 'Cerrar', { duration: 3000 });
+      }
+    );
+  } else {
+    this.slugInput.nativeElement.style.border = '2px solid red';
+    this.h1Input.nativeElement.style.border = '2px solid red';
+    this.snackBar.open('Rellena los campos solicitados', 'Cerrar', { duration: 4000 });
+  }
+}
 
 
 

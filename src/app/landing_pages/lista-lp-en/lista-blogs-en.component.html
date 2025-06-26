@@ -1,0 +1,68 @@
+<div class="p-3 bg-white rounded shadow-sm border">
+    <h2 class="mb-4 text-dark fw-bold border-bottom pb-2">
+        <i class="fas fa-language me-2 text-primary"></i> Traducción de Blogs
+    </h2>
+
+    <div class="table-responsive" *ngIf="blogsTranslate.length > 0; else sinTraducciones">
+        <table class="table table-striped table-hover align-middle border shadow-sm">
+            <thead class="table-light text-dark border-bottom">
+                <tr>
+                    <th>#</th>
+                    <th>Blog en Español</th>
+                    <th>Blog en Inglés</th>
+                    <th style="width: 200px;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let blog of blogsTranslate; let i = index">
+                    <td>{{ i + 1 }}</td>
+
+                    <td>
+                        <div class="fw-semibold">{{ blog.title_es }}</div>
+                        <div class="small text-muted">
+                            <a [href]="domain + (blog.url_es === 'blog' ? '/' + blog.url_es + '/' : '/blog/' + blog.url_es + '/')"
+                                target="_blank" class="text-decoration-none">
+                                <i class="fas fa-arrow-right me-1"></i>{{ blog.url_es }}
+                            </a>
+                        </div>
+                    </td>
+
+                    <td>
+                        <span *ngIf="blog.title_en; else sinTraduccion">
+                            {{ blog.title_en }}
+                            <div class="small text-muted">
+                                <a [href]="domain + (blog.url_en === 'blog' ? '/en/' + blog.url_en + '/' : '/en/blog/' + blog.url_en + '/')"
+                                    target="_blank" class="text-decoration-none">
+                                    <i class="fas fa-arrow-right me-1"></i>{{ blog.url_en }}
+                                </a>
+                            </div>
+
+                        </span>
+                        <ng-template #sinTraduccion>
+                            <span class="text-muted fst-italic">Sin traducción</span>
+                        </ng-template>
+                    </td>
+
+                    <td>
+                        <a *ngIf="blog.title_en" [routerLink]="['/translate-blog', blog.id_en]"
+                            class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-edit me-1"></i> Traducir
+                        </a>
+
+                        <!--
+                        <button *ngIf="!blog.title_en" class="btn btn-sm btn-outline-success"
+                            (click)="traducir(blog.id_es)">
+                            <i class="fas fa-plus"></i> Traducir
+                        </button>-->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ng-template #sinTraducciones>
+        <div class="alert alert-info">
+            No hay blogs disponibles para traducir.
+        </div>
+    </ng-template>
+</div>
