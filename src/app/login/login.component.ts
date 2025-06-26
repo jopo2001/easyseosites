@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { AdminService } from '../admin.service';
+import { AdminService } from '../servicios/admin.service';
 
 @Component({
   selector: 'app-login',

@@ -1,89 +1,100 @@
-<div class="contenedor-padre" *ngIf="showToolbar"> <!---->
-  <nav class="navbar navbar-expand-lg barra">
-    <button (click)="cajon.toggle()" class="btn ">
-      <i class="fa-solid fa-bars"></i> </button>
+<div class="contenedor-padre" *ngIf="showToolbar">
 
-    <div class="dropdown  ms-auto"> <!--ms-auto empuja el icono a la esquina derecha-->
-      <div class="form-row d-flex">
-        <p style="margin-right: 15px;">Bienvenido:{{userModel.nombres}} {{userModel.apellidos}} </p> <!---->
-        <a href="#"
-          class="d-flex align-items-center justify-content-center link-dark text-decoration-none dropdown-toggle"
-          id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="/assets/logos/logo-storm.png" alt="mdo" width="28" height="28" class="rounded-circle">
+  <!-- HEADER / NAVBAR -->
+  <!-- HEADER / NAVBAR -->
+  <nav class="navbar navbar-light shadow-sm px-4 fixed-top" style="background-color: #00BFFF; z-index: 1050;">
+    <button class="btn btn-link text-white me-3 fs-5" data-bs-toggle="offcanvas" data-bs-target="#sidebarCMS">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <span class="navbar-brand text-white">EASS V2</span>
+
+    <div class="ms-auto d-flex align-items-center text-white">
+      <span class="me-3 fw-light">
+        Bienvenido: {{ userModel.nombres }} {{ userModel.apellidos }}
+      </span>
+      <div class="dropdown">
+        <a class="text-white text-decoration-none dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown">
+          <img src="/assets/logos/logo-storm.png" alt="avatar" width="32" height="32" class="rounded-circle" />
         </a>
-        <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="dropdownUser3">
-          <!--dropdown-menu-end empuja el objeto adentro del div para que no salga el scroll-->
-          <!-- <li><a class="dropdown-item" routerLink="/home">Home</a></li>
-        <li><a class="dropdown-item" routerLink="#">Perfíl</a></li>
-       <li><a class="dropdown-item" href="#">Settings</a></li>-->
-          <!--<li><a class="dropdown-item" href="#">Profile</a></li> "-->
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li><a class="dropdown-item" (click)="logout()">Cerrar Sesión</a></li> <!---->
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+          <li><a class="dropdown-item" (click)="logout()">Cerrar sesión</a></li>
         </ul>
       </div>
+    </div>
+  </nav>
 
+  <!-- SIDEBAR OFFCANVAS -->
+  <div class="offcanvas offcanvas-start border-end shadow-sm" tabindex="-1" id="sidebarCMS" #offcanvasSidebar>
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title text-primary">Menú</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
     </div>
 
-  </nav>
-  <mat-sidenav-container class="contenido">
-    <mat-sidenav class="menu-lateral" #cajon mode="side">
+    <div class="offcanvas-body p-0">
+      <div class="accordion" id="accordionSidebar">
 
-      <mat-expansion-panel class="menu-subtones">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <i class="fa-solid fa-blog icon-m"></i>
-            Blog
-          </mat-panel-title>
-        </mat-expansion-panel-header>
+        <!-- HEADER -->
+        <div class="accordion-item border-0">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed bg-white text-dark fw-semibold" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapseHeader" aria-expanded="false"
+              aria-controls="collapseHeader">
+              <i class="fa-solid fa-object-group me-2 text-primary"></i>
+              Header
+            </button>
+          </h2>
+          <div id="collapseHeader" class="accordion-collapse collapse" data-bs-parent="#accordionSidebar">
+            <div class="accordion-body py-2 px-4">
 
-        <mat-nav-list>
-          <a mat-list-item routerLink="/crear-blog">
-            <div class="list-item-container">
-              <i class="fa-solid fa-pen-to-square icon-m"></i>
-              <span>Crear Blog</span>
+                <a class="nav-link text-dark py-1" routerLink="/header/agregar-enlace" (click)="closeSidebar()">
+                <i class="fa-solid fa-plus me-2"></i>
+                Agregar Enlace
+              </a>
+
+              <a class="nav-link text-dark py-1" routerLink="/header/configuracion" (click)="closeSidebar()">
+                <i class="fa-solid fa-sliders me-2 text-primary"></i>
+                Configuración
+              </a>
+
+            
             </div>
-          </a>
-        </mat-nav-list>
+          </div>
+        </div>
 
-        <mat-nav-list>
-          <a mat-list-item routerLink="/lista-blogs">
-            <div class="list-item-container">
-              <i class="fa-solid fa-list icon-m"></i>
-              <span>Ver Blogs</span>
+        <!-- BLOG -->
+        <div class="accordion-item border-0">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed bg-white text-dark fw-semibold" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapseBlog" aria-expanded="false"
+              aria-controls="collapseBlog">
+              <i class="fa-brands fa-webflow me-2 text-primary"></i>
+              Landing Page
+            </button>
+          </h2>
+          <div id="collapseBlog" class="accordion-collapse collapse" data-bs-parent="#accordionSidebar">
+            <div class="accordion-body py-2 px-4">
+              <a class="nav-link text-dark py-1" routerLink="/crear-lp" (click)="closeSidebar()">
+                <i class="fa-solid fa-pen me-2 text-primary"></i>
+                Crear LP
+              </a>
+              <a class="nav-link text-dark py-1" routerLink="/lista-lp" (click)="closeSidebar()">
+                <i class="fa-solid fa-list me-2 text-primary"></i>
+                Ver LP's
+              </a>
             </div>
-          </a>
-        </mat-nav-list>
-      </mat-expansion-panel>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-      <mat-expansion-panel class="menu-subtones">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <i class="fa-solid fa-language icon-m"></i>
-            Traducción
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <mat-nav-list>
-          <a mat-list-item routerLink="/lista-blogs-en">
-            <div class="list-item-container">
-              <i class="fa-solid fa-globe icon-m"></i>
-              <span>Ver Traducciones</span>
-            </div>
-          </a>
-
-        </mat-nav-list>
-      </mat-expansion-panel>
-
-
-    </mat-sidenav>
-    <mat-sidenav-content class="padding-10">
-      <router-outlet></router-outlet>
-
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+  <!-- CONTENIDO -->
+  <main class="p-4" style="background-color: #f5f8fa; min-height: 100vh; margin-top: 70px;">
+    <router-outlet></router-outlet>
+  </main>
 </div>
 
-<app-login *ngIf="showToolbar===false"></app-login>
+<!-- LOGIN -->
+<app-login *ngIf="showToolbar === false"></app-login>

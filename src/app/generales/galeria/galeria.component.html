@@ -1,0 +1,15 @@
+<div class="galeria-grid">
+  <div class="card-galeria" *ngFor="let img of imagenes">
+    <img [src]="img.url" [alt]="img.name" (click)="abrirImagen(img)">
+    <div class="info">{{ img.name }}</div>
+    <button class="btn btn-outline-danger btn-copy" (click)="copiarUrl(img.url)">
+      Copiar URL
+    </button>
+  </div>
+</div>
+
+<!-- Overlay para mostrar imagen ampliada -->
+<div class="overlay-imagen" *ngIf="imagenSeleccionada" (click)="cerrarImagen()">
+  <img [src]="imagenSeleccionada.url" [alt]="imagenSeleccionada.name" class="imagen-ampliada" (click)="$event.stopPropagation()">
+  <button class="btn btn-light btn-cerrar" (click)="cerrarImagen()">&times;</button>
+</div>

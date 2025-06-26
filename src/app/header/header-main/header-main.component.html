@@ -1,0 +1,40 @@
+<div class="container mt-1">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Menú Principal</h2>
+    <button class="btn btn-primary btn-sm" routerLink="/header/agregar-enlace">
+      <i class="fa-solid fa-plus me-1"></i> Agregar Enlace
+    </button>
+  </div>
+
+  <div *ngFor="let menu of headerMenus" class="card mb-2">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div (click)="toggleMenu(menu.id)" style="cursor: pointer;">
+        <i class="fa-solid fa-bars me-2 text-primary"></i> {{ menu.nombre }}
+      </div>
+      <div>
+        <button class="btn btn-sm btn-outline-primary me-2" (click)="editarMenu(menu)">
+          <i class="fa-solid fa-pen"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-danger" (click)="eliminarMenu(menu.id)">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="activeMenuId === menu.id" class="card-body pt-2 pb-1 ps-4">
+      <div *ngIf="getSubmenusForMenu(menu.id).length > 0; else sinSubmenu">
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let sub of getSubmenusForMenu(menu.id)" class="list-group-item d-flex justify-content-between">
+            <span>
+              <i class="fa-solid fa-angles-right me-2 text-secondary"></i> {{ sub.nombre }}
+            </span>
+            <small class="text-muted">{{ sub.url }}</small>
+          </li>
+        </ul>
+      </div>
+      <ng-template #sinSubmenu>
+        <p class="text-muted mb-1">No hay submenús registrados.</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

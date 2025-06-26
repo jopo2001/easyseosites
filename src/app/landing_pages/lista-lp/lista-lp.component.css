@@ -1,0 +1,71 @@
+.containerPz {
+  width: 98%;
+  margin: 0 auto;
+}
+
+.tabla-blog {
+  font-size: 0.9rem;
+}
+
+.tabla-blog th {
+  background: #333;
+  color: #fff;
+}
+
+.tabla-blog td {
+  vertical-align: middle;
+}
+
+.buscador-blog{
+    width: 35%;
+}
+
+.buscador-blog input {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.buscador-blog .input-group-text {
+  border-radius: 0;
+  background: #f8f9fa;
+}
+
+.btn-outline-primary {
+  color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  background: #007bff;
+  color: #fff;
+}
+
+.btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background: #dc3545;
+  color: #fff;
+}
+
+.btn-outline-secondary {
+  color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  background: #6c757d;
+  color: #fff;
+}
+
+.btn-accion {
+  min-width: 110px;         /* ancho estándar */
+  text-align: center;       /* alinea iconos + texto */
+  font-weight: 500;         /* mejora visibilidad */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}

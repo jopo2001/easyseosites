@@ -1,10 +1,10 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { Blog } from '../../classes/blog';
+import { LP_EN, LP_ES } from '../../classes/landingPage';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DialogoConfirmacionComponent } from "../../dialogo-confirmacion/dialogo-confirmacion.component";
 import { MatDialog } from '@angular/material/dialog';
-import { AdminService } from '../../admin.service';
+import { AdminService } from '../../servicios/admin.service';
 import { domain } from '../../classes/globals';
 
 import 'tinymce/tinymce.min.js';  // Importa TinyMCE directamente
@@ -16,7 +16,7 @@ import 'tinymce/tinymce.min.js';  // Importa TinyMCE directamente
 })
 export class EditarBlogComponent {
   public domain = domain;
-  public blogModel: Blog = new Blog("","",0,"","","","",0,"","", "", "", "", "", "", "", "", "", "", 0);
+  public blogModel: LP_ES = new LP_ES("","",0,"","","","",0,"","", "", "", "", "", "", "", "", "", "", 0);
   public editorContent = `<p>Escribe tu contenido aquí...</p>`;
   eliminarDocClicked: boolean = false;
   public mostrarGaleria: boolean = false;
@@ -48,7 +48,7 @@ export class EditarBlogComponent {
   obtenerDatosBlog() {
     let id = this.route.snapshot.paramMap.get("id");
     id = id ?? "";
-    this.adminService.getBlogUP(4, id).subscribe((blog: Blog) => {
+    this.adminService.getBlogUP(4, id).subscribe((blog: LP_ES) => {
       this.blogModel = blog;
       this.blogModel.body = this.decodeHtml(blog.body);
       this.urlNew = this.blogModel.url;

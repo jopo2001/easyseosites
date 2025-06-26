@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, Event } from '@angular/router';
 import { filter, pairwise } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AdminService } from './admin.service';
+import { AdminService } from './servicios/admin.service';
 import { User } from './classes/user';
+import { AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+
+
+declare var bootstrap: any; // accede al namespace de Bootstrap
 
 @Component({
   selector: 'app-root',
@@ -15,12 +19,15 @@ export class AppComponent implements OnInit {
   userId: string | null = '';
   previousUrl: string | null = null;
   userModel = new User('', '', '', '', '', '', '', '', 0);
+  @ViewChild('offcanvasSidebar') sidebarRef!: ElementRef;
+  offcanvasInstance: any;
+
 
   constructor(
     private snackBar: MatSnackBar,
     private router: Router,
     private adminService: AdminService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     // Guardar la última URL antes de cada navegación
@@ -63,6 +70,16 @@ export class AppComponent implements OnInit {
       }
     } */
   } 
+
+  ngAfterViewInit(): void {
+    this.offcanvasInstance = new bootstrap.Offcanvas(this.sidebarRef.nativeElement);
+  }
+
+   closeSidebar() {
+    if (this.offcanvasInstance) {
+      this.offcanvasInstance.hide();
+    }
+  }
 
   obtenerDatosUsuario(id_user: string | number) {
     this.adminService.getUserUP(id_user).subscribe(

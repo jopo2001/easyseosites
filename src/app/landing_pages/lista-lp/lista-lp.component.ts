@@ -6,14 +6,15 @@ import { DialogoConfirmacionComponent } from "../../dialogo-confirmacion/dialogo
 import { MatDialog } from '@angular/material/dialog';
 import { AdminService } from '../../servicios/admin.service';
 import { domain } from '../../classes/globals';
+import { PageService } from '../../servicios/pages.service';
 
 
 @Component({
-  selector: 'app-lista-blogs',
-  templateUrl: './lista-blogs.component.html',
-  styleUrl: './lista-blogs.component.css'
+  selector: 'app-lista-lp',
+  templateUrl: './lista-lp.component.html',
+  styleUrl: './lista-lp.component.css'
 })
-export class ListaBlogsComponent implements OnInit {
+export class ListaLPComponent implements OnInit {
   public domain = domain;
   mostrarFormulario: boolean = false; //Variable para mostrar formulario: 
 
@@ -33,6 +34,7 @@ export class ListaBlogsComponent implements OnInit {
 
   constructor(
     private adminService: AdminService,
+    private pageService: PageService,
     private snackBar: MatSnackBar,
     private dialogo: MatDialog,
     private router: Router
@@ -40,16 +42,9 @@ export class ListaBlogsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.obtenerBlogs();
+    this.obtenerLPS();
   }
 
-  /*
-  obtenerSucursales(){
-    return this.autosService.getSucursalesC(5).subscribe(data => { 
-      this.sucursal = data;
-    
-    
-    });
   
   /*Obtener sucursales con filtros */
 
@@ -57,17 +52,16 @@ export class ListaBlogsComponent implements OnInit {
     return Number(status);
   }
 
-  obtenerBlogs() { //Consultas para no depender del PHP
-    this.adminService.getBlogs(1).subscribe(
-      (blogsG: LP_ES[]) => {
-        this.blogs = blogsG;
-        this.blogsOriginal = blogsG;
-
+  obtenerLPS() { //Consultas para no depender del PHP
+    this.pageService.getPageESGlobal().subscribe(
+      (pageES: LP_ES[]) => {
+        this.blogs = pageES;
+        this.blogsOriginal = pageES;
         console.log('Tipo data: ', this.blogs)
       }
-
     );
   }
+
 
   filtrarBlogs() {
     if (this.filtro.trim() === '') {
@@ -83,31 +77,28 @@ export class ListaBlogsComponent implements OnInit {
     }
   }
 
-
-
   mostrarForm() {
     this.mostrarFormulario = !this.mostrarFormulario; // Cambiar el valor de mostrarFormulario
-
   }
 
-  eliminarBlog(item: LP_ES) {
+  eliminarLP(item: LP_ES) {
     this.dialogo
       .open(DialogoConfirmacionComponent, {
-        data: `¿Realmente quieres eliminar este archivo?`
+        data: `¿Deseas eliminar esta LP?`
       })
       .afterClosed()
       .subscribe((confirmado: Boolean) => {
         // Restablecer la bandera después de cerrar el diálogo de confirmación
         if (confirmado) {
           //Consulta para eliminar el registro
-          this.adminService.deleteBlog(item, 3).subscribe(
+          this.pageService.deletePageES(item.id!).subscribe(
             () => {
-              this.snackBar.open('Blog Eliminado Exitosamente', 'Cerrar', { duration: 5000 }); //Abre una barra al fondo para mostrar un mensaje emergente
-              this.obtenerBlogs();
+              this.snackBar.open('Landing Eliminada Exitosamente', 'Cerrar', { duration: 5000 }); //Abre una barra al fondo para mostrar un mensaje emergente
+              this.obtenerLPS();
             },
             error => {
-              console.error('Error al eliminar el blog:', error);
-              this.snackBar.open('No se pudo eliminar el blog', 'Cerrar', { duration: 3000 });
+              console.error('Error al eliminar la LP:', error);
+              this.snackBar.open('No se pudo eliminar la LP', 'Cerrar', { duration: 3000 });
             }
           );
         } else {

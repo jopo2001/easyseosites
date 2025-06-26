@@ -18,13 +18,16 @@ import { ListaBlogsComponent } from './blog/lista-blogs/lista-blogs.component';
 import { EditarBlogComponent } from './blog/editar-blog/editar-blog.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { LoginComponent } from './login/login.component';
-import { GaleriaComponent } from './blog/galeria/galeria.component';
+import { GaleriaComponent } from './generales/galeria/galeria.component';
 import { ListaBlogsEnComponent } from './blog/lista-blogs-en/lista-blogs-en.component';
 import { TranslateBlogComponent } from './blog/translate-blog/translate-blog.component';
-import { HeaderComponent } from './esqueletos/header/header.component';
-import { FooterComponent } from './esqueletos/footer/footer.component';
-import { EsqueletosComponent } from './esqueletos/esqueletos.component';
+import { HeaderMainComponent } from './header/header-main/header-main.component';
+import { HeaderMainAgregarComponent } from './header/header-main-agregar/header-main-agregar.component';
 
+//Imports nuevos
+import { CreateLPComponent } from './landing_pages/create-lp/create-lp.component';
+import { EditarLPComponent } from './landing_pages/editar-lp/editar-lp.component';
+import { ListaLPComponent } from './landing_pages/lista-lp/lista-lp.component';
 
 
 @NgModule({
@@ -37,9 +40,11 @@ import { EsqueletosComponent } from './esqueletos/esqueletos.component';
     GaleriaComponent,
     ListaBlogsEnComponent,
     TranslateBlogComponent,
-    HeaderComponent,
-    FooterComponent,
-    EsqueletosComponent,
+    HeaderMainComponent,
+    HeaderMainAgregarComponent,
+    CreateLPComponent,
+    EditarLPComponent,
+    ListaLPComponent,
   ],
   imports: [
     BrowserModule,
