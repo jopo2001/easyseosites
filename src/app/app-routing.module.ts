@@ -12,6 +12,8 @@ import { HeaderMainAgregarComponent } from './header/header-main-agregar/header-
 import { CreateLPComponent } from './landing_pages/create-lp/create-lp.component';
 import { EditarLPComponent } from './landing_pages/editar-lp/editar-lp.component';
 import { ListaLPComponent } from './landing_pages/lista-lp/lista-lp.component';
+// import { HeaderComponent } from './esqueletos/header/header.component';
+import { EsqueletosComponent } from './esqueletos/esqueletos.component';
 
 const routes: Routes = [
   { path: "", component: ListaBlogsComponent }, //Temporal
@@ -23,7 +25,8 @@ const routes: Routes = [
   /*{ path: "lista-blogs-en", component: ListaBlogsEnComponent},
   { path: "translate-blog/:id", component: TranslateBlogComponent },*/
   { path: "header/configuracion", component: HeaderMainComponent },
-  { path: "header/agregar-enlace", component: HeaderMainAgregarComponent }
+  { path: "header/agregar-enlace", component: HeaderMainAgregarComponent },
+  { path: "esqueletos", component: EsqueletosComponent }
 
   //{ path: "**", redirectTo: "" }
 ];

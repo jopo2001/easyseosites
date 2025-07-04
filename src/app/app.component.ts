@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // Guardar la última URL antes de cada navegación
-    /* this.router.events 
+    this.router.events 
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         if (!event.url.includes('/login')) {
@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
       } else {
         this.router.navigate(['/lista-blogs']); // Ruta por defecto si no hay ruta previa
       }
-    } */
+    }
   } 
 
   ngAfterViewInit(): void {

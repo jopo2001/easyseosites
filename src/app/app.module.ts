@@ -28,6 +28,12 @@ import { HeaderMainAgregarComponent } from './header/header-main-agregar/header-
 import { CreateLPComponent } from './landing_pages/create-lp/create-lp.component';
 import { EditarLPComponent } from './landing_pages/editar-lp/editar-lp.component';
 import { ListaLPComponent } from './landing_pages/lista-lp/lista-lp.component';
+import { BlogComponent } from './esqueletos/blog/blog.component';
+import { EsqueletosComponent } from './esqueletos/esqueletos.component';
+import { HeaderComponent } from './esqueletos/header/header.component';
+import { FooterComponent } from './esqueletos/footer/footer.component';
+import { GaleriaFotosComponent } from './esqueletos/galeria/galeria.component';
+import { ContactoComponent } from './esqueletos/contacto/contacto.component';
 
 
 @NgModule({
@@ -45,6 +51,12 @@ import { ListaLPComponent } from './landing_pages/lista-lp/lista-lp.component';
     CreateLPComponent,
     EditarLPComponent,
     ListaLPComponent,
+    BlogComponent,
+    EsqueletosComponent,
+    HeaderComponent,
+    FooterComponent,
+    GaleriaFotosComponent,
+    ContactoComponent
   ],
   imports: [
     BrowserModule,
