@@ -13,9 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatTreeModule } from '@angular/material/tree';
 
-
-
-
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CreateBlogComponent } from './blog/create-blog/create-blog.component';
@@ -33,6 +30,12 @@ import { HeaderMainAgregarComponent } from './header/header-main-agregar/header-
 import { CreateLPComponent } from './landing_pages/create-lp/create-lp.component';
 import { EditarLPComponent } from './landing_pages/editar-lp/editar-lp.component';
 import { ListaLPComponent } from './landing_pages/lista-lp/lista-lp.component';
+import { BlogComponent } from './esqueletos/blog/blog.component';
+import { EsqueletosComponent } from './esqueletos/esqueletos.component';
+import { HeaderComponent } from './esqueletos/header/header.component';
+import { FooterComponent } from './esqueletos/footer/footer.component';
+import { GaleriaFotosComponent } from './esqueletos/galeria/galeria.component';
+import { ContactoComponent } from './esqueletos/contacto/contacto.component';
 import { HeaderMainEditarComponent } from './header/header-main-editar/header-main-editar.component';
 import { HeaderSubmenuEditarComponent } from './header/header-submenu-editar/header-submenu-editar.component';
 import { HeaderSubmenuAgregarComponent } from './header/header-submenu-agregar/header-submenu-agregar.component';
@@ -59,6 +62,12 @@ import { BodyScriptsEditarComponent } from './scripts/body-scripts-editar/body-s
     CreateLPComponent,
     EditarLPComponent,
     ListaLPComponent,
+    BlogComponent,
+    EsqueletosComponent,
+    HeaderComponent,
+    FooterComponent,
+    GaleriaFotosComponent,
+    ContactoComponent,
     HeaderMainEditarComponent,
     HeaderSubmenuEditarComponent,
     HeaderSubmenuAgregarComponent,
