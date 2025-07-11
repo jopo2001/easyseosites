@@ -1,7 +1,9 @@
 <div class="card p-3 mb-3">
-  <h2 class="mb-3"><i class="fa-solid fa-plus text-primary me-2"></i> Nuevo encabezado</h2>
+  <h2 class="mb-3">
+    <i class="fa-solid fa-pen text-primary me-2"></i> Agregar submenú a {{this.headerModel.nombre}}
+  </h2>
 
-  <form [formGroup]="formMenu" (ngSubmit)="guardarNuevoMenu()">
+  <form [formGroup]="formMenu" (ngSubmit)="guardarEdicion()">
     <div class="row g-3">
 
       <!-- Nombre -->
@@ -28,6 +30,7 @@
         <div class="input-group">
           <span class="input-group-text"><i class="fa-solid fa-sort-numeric-down"></i></span>
           <input type="number" class="form-control" formControlName="orden" placeholder="Ej: 1, 2, 3">
+
         </div>
       </div>
 
@@ -40,20 +43,13 @@
         </div>
       </div>
 
-      <!-- Subnivel -->
-      <div class="col-md-4">
-        <label class="form-label d-block">¿Tiene submenú?</label>
-        <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" formControlName="subnivel">
-          <label class="form-check-label">{{ formMenu.value.subnivel ? 'Sí' : 'No' }}</label>
-        </div>
-      </div>
+
     </div>
 
     <!-- Botones -->
     <div class="mt-4 d-flex justify-content-end">
       <button type="submit" class="btn btn-success me-2">
-        <i class="fa-solid fa-check"></i> Guardar
+        <i class="fa-solid fa-check"></i> Guardar Cambios
       </button>
       <button type="button" class="btn btn-secondary" routerLink="/header/configuracion">
         <i class="fa-solid fa-xmark"></i> Cancelar

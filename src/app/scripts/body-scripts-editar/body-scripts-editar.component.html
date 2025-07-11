@@ -1,0 +1,75 @@
+<div class="container-fluid mt-1">
+  <div class="mb-4 d-flex align-items-center">
+    <i class="fa-solid fa-code text-primary fs-2 me-2"></i>
+    <div>
+      <h2 class="mb-0 text-dark">Edición de Script <span class="text-muted small">{{scriptBody.nombre}}</span> </h2>
+    </div>
+  </div>
+
+  <form [formGroup]="formScript" (ngSubmit)="guardarEdicionScript()">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="nombre" class="form-label fw-semibold">
+            <i class="fa-solid fa-tag me-1 text-primary"></i>
+            Nombre del Script
+          </label>
+          <input
+            id="nombre"
+            type="text"
+            formControlName="nombre"
+            class="form-control"
+            placeholder="Ej. Google Analytics"
+            [ngClass]="{'is-invalid': formScript.get('nombre')?.invalid && formScript.get('nombre')?.touched}"
+          />
+          <div class="invalid-feedback" *ngIf="formScript.get('nombre')?.hasError('required')">
+            El nombre es obligatorio.
+          </div>
+          <div class="invalid-feedback" *ngIf="formScript.get('nombre')?.hasError('maxLength')">
+            El nombre es demasiado largo.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label fw-semibold">
+            <i class="fa-solid fa-align-left me-1 text-primary"></i>
+            Descripción
+          </label>
+          <textarea
+            id="description"
+            rows="2"
+            formControlName="description"
+            class="form-control"
+            placeholder="Breve descripción del script..."
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="codigo" class="form-label fw-semibold">
+            <i class="fa-solid fa-code me-1 text-primary"></i>
+            Código / Script
+          </label>
+          <textarea
+            id="codigo"
+            rows="6"
+            formControlName="codigo"
+            class="form-control font-monospace"
+            placeholder="&lt;script&gt;...&lt;/script&gt;"
+            [ngClass]="{'is-invalid': formScript.get('codigo')?.invalid && formScript.get('codigo')?.touched}"
+          ></textarea>
+          <div class="invalid-feedback" *ngIf="formScript.get('codigo')?.hasError('required')">
+            El código es obligatorio.
+          </div>
+        </div>
+      </div>
+      <div class="card-footer bg-white d-flex justify-content-between">
+        <a routerLink="/scripts/main-body" class="btn btn-outline-secondary">
+          <i class="fa-solid fa-arrow-left me-1"></i> Cancelar
+        </a>
+        <button class="btn btn-primary" [disabled]="formScript.invalid">
+          <i class="fa-solid fa-save me-1"></i> Guardar Script
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

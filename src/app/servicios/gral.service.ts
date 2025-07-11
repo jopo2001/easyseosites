@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { domain } from '../classes/globals';
 import { HeaderGlobal, HeaderMenu, HeaderSubmenu } from '../classes/header';
 import { HttpRequest } from '@angular/common/http';
+import { ScriptsBody, ScriptsHead } from '../classes/confGenerales';
 
 
 @Injectable({
@@ -43,11 +44,12 @@ export class GralService {
   }
 
   updateHeaderGlobal(id: number, formData: FormData): Observable<any> {
-    const req = new HttpRequest('POST', `${this.baseUrl}/header-global/${id}?_method=PUT`, formData);
-    return this.http.request(req).pipe(
+    formData.append('_method', 'PUT'); // override para el backend PHP
+    return this.http.post(`${this.baseUrl}/header-global/${id}?_method=PUT`, formData).pipe(
       catchError(this.handleError)
     );
   }
+
 
   deleteHeaderGlobal(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/header-global/${id}`).pipe(
@@ -78,8 +80,8 @@ export class GralService {
   }
 
   updateHeaderMenu(id: number, formData: FormData): Observable<any> {
-    const req = new HttpRequest('POST', `${this.baseUrl}/header-menu/${id}?_method=PUT`, formData);
-    return this.http.request(req).pipe(
+    formData.append('_method', 'PUT'); // override para el backend PHP
+    return this.http.post(`${this.baseUrl}/header-menu/${id}?_method=PUT`, formData).pipe(
       catchError(this.handleError)
     );
   }
@@ -111,11 +113,12 @@ export class GralService {
   }
 
   updateHeaderSubmenu(id: number, formData: FormData): Observable<any> {
-    const req = new HttpRequest('POST', `${this.baseUrl}/header-submenu/${id}?_method=PUT`, formData);
-    return this.http.request(req).pipe(
+    formData.append('_method', 'PUT'); // override para el backend PHP
+    return this.http.post(`${this.baseUrl}/header-submenu/${id}?_method=PUT`, formData).pipe(
       catchError(this.handleError)
     );
   }
+
 
   deleteHeaderSubmenu(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/header-submenu/${id}`).pipe(
@@ -124,13 +127,70 @@ export class GralService {
   }
 
 
-  /*Configuración de header para Easy Seo Sites End */
+  //Scripts Terceros CRUD 
+  getScriptsHead(): Observable<ScriptsHead[]> {
+    return this.http.get<ScriptsHead[]>(`${this.baseUrl}/script-head`).pipe(
+      catchError(this.handleError)
+    );
+  }
 
+  getScriptsBody(): Observable<ScriptsBody[]> {
+    return this.http.get<ScriptsBody[]>(`${this.baseUrl}/script-body`).pipe(
+      catchError(this.handleError)
+    );
+  }
 
+  getScriptHeadParticular(opcion: number): Observable<ScriptsHead> {
+    return this.http.get<{ success: boolean; data: ScriptsHead }>(`${this.baseUrl}/script-head/${opcion}`).pipe(
+      map(response => response.data),
+      catchError(this.handleError)
+    );
+  }
 
+  getScriptBodyParticular(opcion: number): Observable<ScriptsBody> {
+    return this.http.get<{ success: boolean; data: ScriptsBody }>(`${this.baseUrl}/script-body/${opcion}`).pipe(
+      map(response => response.data),
+      catchError(this.handleError)
+    );
+  }
 
+  createScriptHead(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/script-head`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
 
+  createScriptBody(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/script-body`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
 
+  updateScriptHead(id: number, formData: FormData): Observable<any> {
+    formData.append('_method', 'PUT'); // override para el backend PHP
+    return this.http.post(`${this.baseUrl}/script-head/${id}?_method=PUT`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateScriptBody(id: number, formData: FormData): Observable<any> {
+    formData.append('_method', 'PUT'); // override para el backend PHP
+    return this.http.post(`${this.baseUrl}/script-body/${id}?_method=PUT`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteScriptHead(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/script-head/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteScriptBody(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/script-body/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.error('Error en la solicitud:', error);

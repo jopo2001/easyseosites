@@ -1,40 +1,126 @@
 <div class="container mt-1">
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2 class="mb-0">Menú Principal</h2>
-    <button class="btn btn-primary btn-sm" routerLink="/header/agregar-enlace">
-      <i class="fa-solid fa-plus me-1"></i> Agregar Enlace
+    <h2 class="mb-0">Menú de Navegación</h2>
+
+
+    <div class="d-flex gap-2">
+      <button class="btn btn-secondary btn-sm" (click)="toggleAllMenus()">
+        <i class="fa" [ngClass]="{
+        'fa-compress': allExpanded,
+        'fa-expand': !allExpanded
+      }"></i>
+        {{ allExpanded ? 'Colapsar Todos' : 'Expandir Todos' }}
+      </button>
+
+      <button class="btn btn-primary btn-sm" routerLink="/header/agregar-enlace">
+        <i class="fa-solid fa-plus me-1"></i> Agregar Enlace
+      </button>
+    </div>
+  </div>
+
+
+  <!-- Leyenda -->
+  <p class="text-muted small mb-2">
+    <i class="fa-solid fa-up-down-left-right me-1"></i>
+    Arrastra el ítem para reacomodar el orden.
+  </p>
+
+
+
+  <!-- Contenedor arrastrable -->
+  <div cdkDropList (cdkDropListDropped)="drop($event)" class="d-flex flex-column gap-2">
+    <div *ngFor="let menu of headerMenus" cdkDrag class="card" [ngClass]="{'active': activeMenuIds.includes(menu.id),     
+    'bg-light text-muted opacity-75': menu.status === 'Inactivo'}">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <!-- Zona de arrastre -->
+        <div cdkDragHandle style="cursor: grab; display: flex; align-items: center;">
+          <i class="fa-solid fa-bars me-2 text-primary"></i> {{ menu.nombre }}
+          <span *ngIf="menu.status === 'Inactivo'" class="badge bg-secondary ms-2">Inactivo</span>
+
+        </div>
+
+        <div class="d-flex align-items-center gap-1">
+          <!-- Botón ver submenús -->
+          <!-- Botón ver submenús SOLO si tiene subnivel -->
+          <button *ngIf="+menu.subnivel === 1" class="btn btn-sm btn-outline-secondary" (click)="toggleMenu(menu.id)"
+            [attr.aria-expanded]="activeMenuIds.includes(menu.id)">
+            <i class="fa me-2" [ngClass]="activeMenuIds.includes(menu.id) ? 'fa-chevron-down' : 'fa-chevron-right'"></i>
+            Expandir Submenú
+          </button>
+
+
+
+
+          <a class="btn btn-sm btn-outline-success" *ngIf="+menu.subnivel === 1"
+            [routerLink]="['/header/agregar-subenlace', menu.id]">
+            <i class="fa-solid fa-plus"></i>
+          </a>
+
+          <!--(click)="agregarSubmenu(sub.id_header_menu)"-->
+          <button class="btn btn-sm btn-outline-primary" [routerLink]="['/header/editar-enlace', menu.id]">
+            <i class="fa-solid fa-pen"></i>
+          </button>
+          <button class="btn btn-sm btn-outline-danger" (click)="eliminarMenu(menu.id)">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Submenús -->
+      <div *ngIf="activeMenuIds.includes(menu.id)" class="card-body pt-2 pb-1 ps-4">
+        <div *ngIf="(submenusPorMenu[menu.id]?.length || 0) > 0; else sinSubmenu">
+          <p class="text-muted small mb-1">
+            <i class="fa-solid fa-up-down-left-right me-1"></i>
+            Arrastra los submenús para reacomodar su orden.
+          </p>
+
+          <ul class="list-group list-group-flush" cdkDropList [cdkDropListData]="submenusPorMenu[menu.id]"
+            (cdkDropListDropped)="dropSubmenu($event, menu.id)">
+            <li *ngFor="let sub of submenusPorMenu[menu.id]" cdkDrag
+              class="list-group-item d-flex justify-content-between align-items-center">
+              <span class="d-flex align-items-center" cdkDragHandle style="cursor: grab;">
+                <i class="fa-solid fa-bars me-2 text-primary"></i>
+                {{ sub.nombre }}
+                <div *ngIf="sub.status === 'Inactivo'" class="badge bg-secondary ms-2">Inactivo</div>
+              </span>
+
+              <div class="d-flex align-items-center gap-1">
+                <!--<small class="text-muted">{{ sub.url }}</small>-->
+                <a class="btn btn-sm btn-outline-primary" [routerLink]="['/header/editar-subenlace', sub.id]">
+                  <i class="fa-solid fa-pen"></i>
+                </a>
+
+                <button class="btn btn-sm btn-outline-danger" (click)="eliminarSubmenu(sub.id)">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </li>
+          </ul>
+
+          <div class="mt-3 mb-2 text-end">
+            <button class="btn btn-success btn-sm" (click)="guardarOrdenSubmenu(menu.id)"
+              [disabled]="!ordenModificadoSubmenus[menu.id]">
+              <i class="fa-solid fa-floppy-disk me-1"></i> Guardar Orden Submenús
+            </button>
+          </div>
+        </div>
+
+        <ng-template #sinSubmenu>
+          <p class="text-muted mb-1">No hay submenús registrados.</p>
+        </ng-template>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- Botón guardar orden -->
+  <div class="mt-3 text-end">
+    <button class="btn btn-success" (click)="guardarOrden()" [disabled]="!ordenModificado">
+      <i class="fa-solid fa-floppy-disk me-1"></i> Guardar Orden
     </button>
   </div>
 
-  <div *ngFor="let menu of headerMenus" class="card mb-2">
-    <div class="card-header d-flex justify-content-between align-items-center">
-      <div (click)="toggleMenu(menu.id)" style="cursor: pointer;">
-        <i class="fa-solid fa-bars me-2 text-primary"></i> {{ menu.nombre }}
-      </div>
-      <div>
-        <button class="btn btn-sm btn-outline-primary me-2" (click)="editarMenu(menu)">
-          <i class="fa-solid fa-pen"></i>
-        </button>
-        <button class="btn btn-sm btn-outline-danger" (click)="eliminarMenu(menu.id)">
-          <i class="fa-solid fa-trash"></i>
-        </button>
-      </div>
-    </div>
 
-    <div *ngIf="activeMenuId === menu.id" class="card-body pt-2 pb-1 ps-4">
-      <div *ngIf="getSubmenusForMenu(menu.id).length > 0; else sinSubmenu">
-        <ul class="list-group list-group-flush">
-          <li *ngFor="let sub of getSubmenusForMenu(menu.id)" class="list-group-item d-flex justify-content-between">
-            <span>
-              <i class="fa-solid fa-angles-right me-2 text-secondary"></i> {{ sub.nombre }}
-            </span>
-            <small class="text-muted">{{ sub.url }}</small>
-          </li>
-        </ul>
-      </div>
-      <ng-template #sinSubmenu>
-        <p class="text-muted mb-1">No hay submenús registrados.</p>
-      </ng-template>
-    </div>
-  </div>
+
 </div>
