@@ -12,8 +12,16 @@ import { HeaderMainAgregarComponent } from './header/header-main-agregar/header-
 import { CreateLPComponent } from './landing_pages/create-lp/create-lp.component';
 import { EditarLPComponent } from './landing_pages/editar-lp/editar-lp.component';
 import { ListaLPComponent } from './landing_pages/lista-lp/lista-lp.component';
-// import { HeaderComponent } from './esqueletos/header/header.component';
-import { EsqueletosComponent } from './esqueletos/esqueletos.component';
+import { HeaderMainEditarComponent } from './header/header-main-editar/header-main-editar.component';
+import { HeaderSubmenuAgregarComponent } from './header/header-submenu-agregar/header-submenu-agregar.component';
+import { HeaderSubmenuEditarComponent } from './header/header-submenu-editar/header-submenu-editar.component';
+import { HeadScriptsComponent } from './scripts/head-scripts/head-scripts.component';
+import { HeadScriptsAgregarComponent } from './scripts/head-scripts-agregar/head-scripts-agregar.component';
+import { HeadScriptsEditarComponent } from './scripts/head-scripts-editar/head-scripts-editar.component';
+import { BodyScriptsComponent } from './scripts/body-scripts/body-scripts.component';
+import { BodyScriptsAgregarComponent } from './scripts/body-scripts-agregar/body-scripts-agregar.component';
+import { BodyScriptsEditarComponent } from './scripts/body-scripts-editar/body-scripts-editar.component';
+
 
 const routes: Routes = [
   { path: "", component: ListaBlogsComponent }, //Temporal
@@ -26,7 +34,27 @@ const routes: Routes = [
   { path: "translate-blog/:id", component: TranslateBlogComponent },*/
   { path: "header/configuracion", component: HeaderMainComponent },
   { path: "header/agregar-enlace", component: HeaderMainAgregarComponent },
-  { path: "esqueletos", component: EsqueletosComponent }
+  { path: "header/editar-enlace/:id", component: HeaderMainEditarComponent },
+
+  { path: "header/editar-subenlace/:id", component: HeaderSubmenuEditarComponent },
+  { path: "header/agregar-subenlace/:id_menu", component: HeaderSubmenuAgregarComponent },
+
+  { path: "scripts/main-head", component: HeadScriptsComponent },
+  { path: "scripts/main-head/agregar", component: HeadScriptsAgregarComponent },
+  { path: "scripts/main-head/editar/:id", component: HeadScriptsEditarComponent },
+  { path: "scripts/main-body", component: BodyScriptsComponent },
+  { path: "scripts/main-body/agregar", component: BodyScriptsAgregarComponent },
+  { path: "scripts/main-body/editar/:id", component: BodyScriptsEditarComponent },
+
+
+
+
+
+  //{ path: "scripts/main-body", component: BodyComponent },
+
+
+
+
 
   //{ path: "**", redirectTo: "" }
 ];

@@ -10,6 +10,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { HttpClientModule } from '@angular/common/http';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatTreeModule } from '@angular/material/tree';
 
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -34,6 +36,15 @@ import { HeaderComponent } from './esqueletos/header/header.component';
 import { FooterComponent } from './esqueletos/footer/footer.component';
 import { GaleriaFotosComponent } from './esqueletos/galeria/galeria.component';
 import { ContactoComponent } from './esqueletos/contacto/contacto.component';
+import { HeaderMainEditarComponent } from './header/header-main-editar/header-main-editar.component';
+import { HeaderSubmenuEditarComponent } from './header/header-submenu-editar/header-submenu-editar.component';
+import { HeaderSubmenuAgregarComponent } from './header/header-submenu-agregar/header-submenu-agregar.component';
+import { HeadScriptsComponent } from './scripts/head-scripts/head-scripts.component';
+import { HeadScriptsAgregarComponent } from './scripts/head-scripts-agregar/head-scripts-agregar.component';
+import { HeadScriptsEditarComponent } from './scripts/head-scripts-editar/head-scripts-editar.component';
+import { BodyScriptsComponent } from './scripts/body-scripts/body-scripts.component';
+import { BodyScriptsAgregarComponent } from './scripts/body-scripts-agregar/body-scripts-agregar.component';
+import { BodyScriptsEditarComponent } from './scripts/body-scripts-editar/body-scripts-editar.component';
 
 
 @NgModule({
@@ -56,7 +67,19 @@ import { ContactoComponent } from './esqueletos/contacto/contacto.component';
     HeaderComponent,
     FooterComponent,
     GaleriaFotosComponent,
-    ContactoComponent
+    ContactoComponent,
+    HeaderMainEditarComponent,
+    HeaderSubmenuEditarComponent,
+    HeaderSubmenuAgregarComponent,
+    HeadScriptsComponent,
+    HeadScriptsAgregarComponent,
+    HeadScriptsEditarComponent,
+    BodyScriptsComponent,
+    BodyScriptsAgregarComponent,
+    BodyScriptsEditarComponent
+
+
+    
   ],
   imports: [
     BrowserModule,
@@ -72,6 +95,8 @@ import { ContactoComponent } from './esqueletos/contacto/contacto.component';
     FormsModule,
     ReactiveFormsModule,
     EditorModule,
+    DragDropModule,
+    MatTreeModule,
   ],
   providers: [
     provideAnimationsAsync()

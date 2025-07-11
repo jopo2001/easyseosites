@@ -1,7 +1,6 @@
 <div class="contenedor-padre" *ngIf="showToolbar">
 
   <!-- HEADER / NAVBAR -->
-  <!-- HEADER / NAVBAR -->
   <nav class="navbar navbar-light shadow-sm px-4 fixed-top" style="background-color: #00BFFF; z-index: 1050;">
     <button class="btn btn-link text-white me-3 fs-5" data-bs-toggle="offcanvas" data-bs-target="#sidebarCMS">
       <i class="fa-solid fa-bars"></i>
@@ -47,7 +46,7 @@
           <div id="collapseHeader" class="accordion-collapse collapse" data-bs-parent="#accordionSidebar">
             <div class="accordion-body py-2 px-4">
 
-                <a class="nav-link text-dark py-1" routerLink="/header/agregar-enlace" (click)="closeSidebar()">
+              <a class="nav-link text-dark py-1" routerLink="/header/agregar-enlace" (click)="closeSidebar()">
                 <i class="fa-solid fa-plus me-2"></i>
                 Agregar Enlace
               </a>
@@ -57,7 +56,7 @@
                 Configuración
               </a>
 
-            
+
             </div>
           </div>
         </div>
@@ -85,6 +84,42 @@
             </div>
           </div>
         </div>
+
+        <!-- Scripts -->
+        <div class="accordion-item border-0">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed bg-white text-dark fw-semibold" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapseScript" aria-expanded="false"
+              aria-controls="collapseScript">
+              <i class="fa-solid fa-code me-2 text-primary"></i>
+              Scripts Terceros
+            </button>
+          </h2>
+
+          <div id="collapseScript" class="accordion-collapse collapse" data-bs-parent="#accordionSidebar">
+            <div class="accordion-body py-2 px-4">
+              <a class="nav-link text-dark py-1" routerLink="/scripts/main-head/agregar" (click)="closeSidebar()">
+                <i class="fa-solid fa-file-code me-2 text-primary"></i>
+                Insertar Script en Head
+              </a>
+              <a class="nav-link text-dark py-1" routerLink="/scripts/main-head" (click)="closeSidebar()">
+                <i class="fa-solid fa-scroll me-2 text-primary"></i>
+                Ver Scripts en Head
+              </a>
+              <a class="nav-link text-dark py-1" routerLink="/scripts/main-body/agregar" (click)="closeSidebar()">
+                <i class="fa-solid fa-file-code me-2 text-secondary"></i>
+                Insertar Script en Body
+              </a>
+              <a class="nav-link text-dark py-1" routerLink="/scripts/main-body" (click)="closeSidebar()">
+                <i class="fa-solid fa-scroll me-2 text-secondary"></i>
+                Ver Scripts en Body
+              </a>
+
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </div>
   </div>

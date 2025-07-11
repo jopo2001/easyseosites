@@ -1,0 +1,28 @@
+/* Color del thead personalizado */
+.table-header-custom {
+  background-color: #00BFFF; /* celeste corporativo */
+  color: #fff;
+}
+
+/* Hover en filas */
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 191, 255, 0.08);
+  cursor: pointer;
+}
+
+/* Bordes y sombra */
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* Botones con transición */
+.btn-group .btn {
+  transition: background-color 0.2s ease;
+}
+
+.btn-group .btn:hover {
+  background-color: #f0f0f0;
+}
