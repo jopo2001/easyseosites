@@ -20,25 +20,3 @@ export class confRrss {
     public f_registro: string // o Date si lo manejas como objeto Date
   ) { }
 }
-
-export class ScriptsBody {
-  constructor(
-    public id: number,
-    public nombre: string,
-    public codigo: string,
-    public f_registro: string,
-    public id_user: number,
-    public description: string,
-  ) { }
-}
-
-export class ScriptsHead {
-  constructor(
-    public id: number,
-    public nombre: string,
-    public codigo: string,
-    public f_registro: string,
-    public id_user: number,
-    public description: string,
-  ) { }
-}
