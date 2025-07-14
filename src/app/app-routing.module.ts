@@ -21,6 +21,7 @@ import { HeadScriptsEditarComponent } from './scripts/head-scripts-editar/head-s
 import { BodyScriptsComponent } from './scripts/body-scripts/body-scripts.component';
 import { BodyScriptsAgregarComponent } from './scripts/body-scripts-agregar/body-scripts-agregar.component';
 import { BodyScriptsEditarComponent } from './scripts/body-scripts-editar/body-scripts-editar.component';
+import { EsqueletosComponent } from './esqueletos/esqueletos.component';
 
 
 const routes: Routes = [
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: "scripts/main-body", component: BodyScriptsComponent },
   { path: "scripts/main-body/agregar", component: BodyScriptsAgregarComponent },
   { path: "scripts/main-body/editar/:id", component: BodyScriptsEditarComponent },
+  { path: "esqueletos", component: EsqueletosComponent },
 
 
 

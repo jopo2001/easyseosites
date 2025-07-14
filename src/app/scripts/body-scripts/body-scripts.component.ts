@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ScriptsHead } from '../../classes/confGenerales';
+import { ScriptsHead } from '../../classes/scripts_bd';
 import { GralService } from '../../servicios/gral.service';
 import Swal from 'sweetalert2';
 

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GralService } from '../../servicios/gral.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ScriptsHead } from '../../classes/confGenerales';
+import { ScriptsHead } from '../../classes/scripts_bd';
 import Swal from 'sweetalert2';
 
 
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   styleUrl: './head-scripts-editar.component.css'
 })
 export class HeadScriptsEditarComponent implements OnInit{
-  public scriptHead: ScriptsHead =  new ScriptsHead(0,'','','',0,'');
+  public scriptHead: ScriptsHead =  new ScriptsHead(0,'','','', '', 0, 0);
   formScript: FormGroup;
 
   constructor(

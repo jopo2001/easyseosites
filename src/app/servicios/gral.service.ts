@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { domain } from '../classes/globals';
 import { HeaderGlobal, HeaderMenu, HeaderSubmenu } from '../classes/header';
 import { HttpRequest } from '@angular/common/http';
-import { ScriptsBody, ScriptsHead } from '../classes/confGenerales';
+import { ScriptsBody, ScriptsHead } from '../classes/scripts_bd';
 
 
 @Injectable({
