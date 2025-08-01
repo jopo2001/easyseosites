@@ -54,10 +54,10 @@ export class ListaLPComponent implements OnInit {
 
   obtenerLPS() { //Consultas para no depender del PHP
     this.pageService.getPageESGlobal().subscribe(
-      (pageES: LP_ES[]) => {
+      (pageES: LP_ES[]) => {      
         this.blogs = pageES;
         this.blogsOriginal = pageES;
-        console.log('Tipo data: ', this.blogs)
+        // console.log('Tipo data: ', this.blogs)
       }
     );
   }

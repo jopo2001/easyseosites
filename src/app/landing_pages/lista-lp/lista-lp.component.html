@@ -44,7 +44,7 @@
             <button class="btn btn-outline-primary btn-sm" [routerLink]="['/editar-lp', item.id]">
               <i class="fa-solid fa-pen-to-square"></i> Editar
             </button>
-            <button class="btn btn-outline-danger btn-sm" (click)="eliminarLP(item)">
+            <button *ngIf="(item.id ?? 0) > 20" class="btn btn-outline-danger btn-sm" (click)="eliminarLP(item)">
               <i class="fa-solid fa-trash"></i> Eliminar
             </button>
             <a class="btn btn-outline-secondary btn-sm" target="_blank"

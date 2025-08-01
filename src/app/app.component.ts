@@ -56,10 +56,10 @@ export class AppComponent implements OnInit {
     this.userId = localStorage.getItem('id_user');
 
     if (this.userId === '' || this.userId === null) {
-      console.log('No se encontró id_user en localStorage');
+      // console.log('No se encontró id_user en localStorage');
     } else {
       this.adminService.startSessionTimer2();
-      console.log('Sesión activa, id_user:', this.userId);
+      // console.log('Sesión activa, id_user:', this.userId);
       this.obtenerDatosUsuario(this.userId);
 
       const ultimaRuta = sessionStorage.getItem('ultimaRuta');
