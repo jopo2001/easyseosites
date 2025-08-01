@@ -45,6 +45,7 @@ import { HeadScriptsEditarComponent } from './scripts/head-scripts-editar/head-s
 import { BodyScriptsComponent } from './scripts/body-scripts/body-scripts.component';
 import { BodyScriptsAgregarComponent } from './scripts/body-scripts-agregar/body-scripts-agregar.component';
 import { BodyScriptsEditarComponent } from './scripts/body-scripts-editar/body-scripts-editar.component';
+import { FooterMainComponent } from './footer/footer-main/footer-main.component';
 
 
 @NgModule({
@@ -76,9 +77,8 @@ import { BodyScriptsEditarComponent } from './scripts/body-scripts-editar/body-s
     HeadScriptsEditarComponent,
     BodyScriptsComponent,
     BodyScriptsAgregarComponent,
-    BodyScriptsEditarComponent
-
-
+    BodyScriptsEditarComponent,
+    FooterMainComponent,
     
   ],
   imports: [

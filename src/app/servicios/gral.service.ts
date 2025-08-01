@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { domain } from '../classes/globals';
 import { HeaderGlobal, HeaderMenu, HeaderSubmenu } from '../classes/header';
+import { FooterGlobal, FooterEncabezados, FooterEnlaces } from '../classes/footer';
 import { HttpRequest } from '@angular/common/http';
 import { ScriptsBody, ScriptsHead } from '../classes/scripts_bd';
 
@@ -122,6 +123,105 @@ export class GralService {
 
   deleteHeaderSubmenu(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/header-submenu/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  //Conf FooterGlobal
+  getFooterGlobal(): Observable<FooterGlobal[]> {
+    return this.http.get<FooterGlobal[]>(`${this.baseUrl}/footer-global`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getFooterGlobalId(id: number): Observable<FooterGlobal> {
+    return this.http.get<{ success: boolean; data: FooterGlobal }>(`${this.baseUrl}/footer-global/${id}`).pipe(
+      map(response => response.data),
+      catchError(this.handleError)
+    );
+  }
+
+  createFooterGlobal(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/footer-global`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateFooterGlobal(id: number, formData: FormData): Observable<any> {
+    formData.append('_method', 'PUT'); // override para el backend PHP
+    return this.http.post(`${this.baseUrl}/footer-global/${id}?_method=PUT`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteFooterGlobal(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/footer-global/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  //Conf FooterEncabezado
+  getFooterEncabezado(): Observable<FooterEncabezados[]> {
+    return this.http.get<FooterEncabezados[]>(`${this.baseUrl}/footer-encabezado`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getFooterEncabezadoId(id: number): Observable<FooterEncabezados> {
+    return this.http.get<{ success: boolean; data: FooterEncabezados }>(`${this.baseUrl}/footer-encabezado/${id}`).pipe(
+      map(response => response.data),
+      catchError(this.handleError)
+    );
+  }
+
+  createFooterEncabezado(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/footer-encabezado`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateFooterEncabezado(id: number, formData: FormData): Observable<any> {
+    formData.append('_method', 'PUT'); // override para el backend PHP
+    return this.http.post(`${this.baseUrl}/footer-encabezado/${id}?_method=PUT`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteFooterEncabezado(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/footer-encabezado/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  //Conf FooterEnlaces
+  getFooterEnlaces(): Observable<FooterEnlaces[]> {
+    return this.http.get<FooterEnlaces[]>(`${this.baseUrl}/footer-enlaces`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getFooterEnlacesId(id: number): Observable<FooterEnlaces> {
+    return this.http.get<{ success: boolean; data: FooterEnlaces }>(`${this.baseUrl}/footer-enlaces/${id}`).pipe(
+      map(response => response.data),
+      catchError(this.handleError)
+    );
+  }
+
+  createFooterEnlaces(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/footer-enlaces`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateFooterEnlaces(id: number, formData: FormData): Observable<any> {
+    formData.append('_method', 'PUT'); // override para el backend PHP
+    return this.http.post(`${this.baseUrl}/footer-enlaces/${id}?_method=PUT`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteFooterEnlaces(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/footer-enlaces/${id}`).pipe(
       catchError(this.handleError)
     );
   }

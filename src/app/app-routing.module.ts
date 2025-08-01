@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { ListaBlogsEnComponent } from './blog/lista-blogs-en/lista-blogs-en.component';
 import { TranslateBlogComponent } from './blog/translate-blog/translate-blog.component';
 import { HeaderMainComponent } from './header/header-main/header-main.component';
+import { FooterMainComponent } from './footer/footer-main/footer-main.component';
 import { HeaderMainAgregarComponent } from './header/header-main-agregar/header-main-agregar.component';
 
 import { CreateLPComponent } from './landing_pages/create-lp/create-lp.component';
@@ -36,6 +37,8 @@ const routes: Routes = [
   { path: "header/configuracion", component: HeaderMainComponent },
   { path: "header/agregar-enlace", component: HeaderMainAgregarComponent },
   { path: "header/editar-enlace/:id", component: HeaderMainEditarComponent },
+
+  { path: "footer/configuracion", component: FooterMainComponent },
 
   { path: "header/editar-subenlace/:id", component: HeaderSubmenuEditarComponent },
   { path: "header/agregar-subenlace/:id_menu", component: HeaderSubmenuAgregarComponent },

@@ -12,7 +12,7 @@ export class FooterGlobal {
 }
 
 export class FooterEncabezados {
-  constructor(
+  constructor(    
     public id: number,
     public nombre: string,
     public status: string,
@@ -31,6 +31,7 @@ export class FooterEnlaces {
     public id_user: number,
     public id_column_encabezado: number,
     public orden: number,
+    public encabezado: string, // as de la columna nombre de la tabla encabezados
     public f_registro: string,
   ) {}
 }
