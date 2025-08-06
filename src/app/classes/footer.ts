@@ -47,3 +47,16 @@ export class FooterLegal {
     public orden: number,    
   ) {}
 }
+
+export class FooterLastOrdenEnlaces {
+  
+  success: boolean;
+  data: {
+    orden: number;
+  };
+
+   constructor(success: boolean, data: { orden: number }) {
+    this.success = success;
+    this.data = data;
+  }
+}

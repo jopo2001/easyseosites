@@ -4,7 +4,7 @@ import { GralService } from '../../servicios/gral.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { domain } from '../../classes/globals';
 import { Router } from '@angular/router';
-import { FooterEncabezados, FooterEnlaces, FooterGlobal } from '../../classes/footer';
+import { FooterEncabezados, FooterEnlaces, FooterGlobal, FooterLastOrdenEnlaces } from '../../classes/footer';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -27,7 +27,7 @@ export class FooterMainComponent {
 
   formFooterEnlaces: FormGroup;
   formEditEnlaces: FormGroup;
-  dataFooterEnlaces: FooterEnlaces[] = [];
+  dataFooterEnlaces: FooterEnlaces[] = [];  
 
   constructor(
     private fb: FormBuilder,
@@ -256,6 +256,12 @@ export class FooterMainComponent {
     this.gralService.getFooterEncabezado().subscribe({
       next: (data) => {
         this.dataFooterEncabezado = data;
+        let last_item = data[0];
+        
+        this.formFooterEncabezados.patchValue({                    
+          orden: Number(last_item.orden) + 1,
+        });
+
       },
       error: (err) => {
         console.error('Error cargando datos del footer global:', err);
@@ -391,11 +397,35 @@ export class FooterMainComponent {
 
 
   /* ENLACES */
+  onEncabezadoChange(id: string) {
+      if (id) {
+
+        this.gralService.getLastOrdenEnlaces(Number(id)).subscribe((items) => {
+          
+          const siguienteOrden = Number(items.data.orden) + 1;
+
+          this.formFooterEnlaces.patchValue({
+              orden: siguienteOrden,
+          });
+          
+        });  
+
+      } else {
+
+        this.formFooterEnlaces.patchValue({                    
+              orden: Number(1),
+        });
+
+      } 
+  }
 
   loadEnlaces(): void {
     this.gralService.getFooterEnlaces().subscribe({
       next: (data) => {
-        this.dataFooterEnlaces = data;
+        this.dataFooterEnlaces = data;                
+        this.formFooterEnlaces.patchValue({                    
+          orden: Number(1),
+        });
       },
       error: (err) => {
         console.error('Error cargando datos del footer global:', err);
@@ -412,8 +442,6 @@ export class FooterMainComponent {
     } else {
       status = 0;
     }
-
-    console.log(item);
 
     // Si tienes un formulario reactivo, rellena los valores:
     this.formEditEnlaces.patchValue({

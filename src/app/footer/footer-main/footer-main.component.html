@@ -19,21 +19,21 @@
                 <form [formGroup]="formFooterGlobal" (ngSubmit)="SubmitFooterGlobal()">
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-12 col-lg-4">
+                            <div class="col-12">
                                 <div class="mb-3">
                                     <label for="logo" class="form-label">Logo</label>
                                     <input class="form-control" type="file" id="logo" formControlName="logo"
                                         (change)="onFileSelected($event)">
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-4">
+                            <div class="col-12">
                                 <div class="mb-3">
                                     <label for="desc_empresa" class="form-label">Descripción de la empresa</label>
                                     <textarea class="form-control" formControlName="desc_empresa" id="desc_empresa"
                                         rows="3"></textarea>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-4">
+                            <div class="col-12">
                                 <label class="columnas_permitidas">Columnas permitidas</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fa-solid fa-sort-numeric-down"></i></span>
@@ -313,9 +313,9 @@
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Encabezado</label>
-                                    <select class="form-select" id="id_column_encabezado" formControlName="id_column_encabezado" aria-label="select option encabezado">
-                                        <option selected>Seleciona un encabezado</option>
-                                        <option *ngFor="let item of dataFooterEncabezado" value="{{item.id}}">{{item.nombre}}</option>
+                                    <select class="form-select" id="id_column_encabezado" #selectElem (change)="onEncabezadoChange(selectElem.value)" formControlName="id_column_encabezado" aria-label="select option encabezado">
+                                        <option value="">Selecciona un valor</option>
+                                        <option *ngFor="let item of dataFooterEncabezado" value="{{item.id}}" [value]="item.id">{{item.nombre}}</option>
                                     </select>
                                 </div>
                             </div>

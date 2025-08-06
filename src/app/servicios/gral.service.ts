@@ -5,7 +5,8 @@ import { catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { domain } from '../classes/globals';
 import { HeaderGlobal, HeaderMenu, HeaderSubmenu } from '../classes/header';
-import { FooterGlobal, FooterEncabezados, FooterEnlaces } from '../classes/footer';
+import { FooterGlobal, FooterEncabezados, FooterEnlaces, FooterLastOrdenEnlaces } from '../classes/footer';
+import { GaleriaGlobal, GaleriaContent } from '../classes/galeria';
 import { HttpRequest } from '@angular/common/http';
 import { ScriptsBody, ScriptsHead } from '../classes/scripts_bd';
 
@@ -200,6 +201,12 @@ export class GralService {
     );
   }
 
+  getLastOrdenEnlaces(id: number): Observable<FooterLastOrdenEnlaces> {
+    return this.http.get<FooterLastOrdenEnlaces>(`${this.baseUrl}/get-views/getLastOrdenEnlaces/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getFooterEnlacesId(id: number): Observable<FooterEnlaces> {
     return this.http.get<{ success: boolean; data: FooterEnlaces }>(`${this.baseUrl}/footer-enlaces/${id}`).pipe(
       map(response => response.data),
@@ -222,6 +229,84 @@ export class GralService {
 
   deleteFooterEnlaces(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/footer-enlaces/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  //GALERIA GLOBAL
+  getGaleriaGlobal(): Observable<GaleriaGlobal[]> {
+    return this.http.get<GaleriaGlobal[]>(`${this.baseUrl}/galeria-global`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // getLastOrdenGaleriaGlobal(id: number): Observable<GaleriaGlobal> {
+  //   return this.http.get<GaleriaGlobal>(`${this.baseUrl}/get-views/getLastOrdenEnlaces/${id}`).pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  getGaleriaGlobalId(id: number): Observable<GaleriaGlobal> {
+    return this.http.get<{ success: boolean; data: GaleriaGlobal }>(`${this.baseUrl}/galeria-global/${id}`).pipe(
+      map(response => response.data),
+      catchError(this.handleError)
+    );
+  }
+
+  createGaleriaGlobal(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/galeria-global`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateGaleriaGlobal(id: number, formData: FormData): Observable<any> {
+    formData.append('_method', 'PUT'); // override para el backend PHP
+    return this.http.post(`${this.baseUrl}/galeria-global/${id}?_method=PUT`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteGaleriaGlobal(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/galeria-global/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // GALERIA CONTENT
+  getGaleriaContent(): Observable<GaleriaContent[]> {
+    return this.http.get<GaleriaContent[]>(`${this.baseUrl}/galeria-content`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // getLastOrdenGaleriaGlobal(id: number): Observable<GaleriaGlobal> {
+  //   return this.http.get<GaleriaGlobal>(`${this.baseUrl}/get-views/getLastOrdenEnlaces/${id}`).pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  getGaleriaContentId(id: number): Observable<GaleriaContent> {
+    return this.http.get<{ success: boolean; data: GaleriaContent }>(`${this.baseUrl}/galeria-content/${id}`).pipe(
+      map(response => response.data),
+      catchError(this.handleError)
+    );
+  }
+
+  createGaleriaContent(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/galeria-content`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateGaleriaContent(id: number, formData: FormData): Observable<any> {
+    formData.append('_method', 'PUT'); // override para el backend PHP
+    return this.http.post(`${this.baseUrl}/galeria-content/${id}?_method=PUT`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteGaleriaContent(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/galeria-content/${id}`).pipe(
       catchError(this.handleError)
     );
   }

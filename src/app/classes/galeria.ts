@@ -3,7 +3,9 @@ export class GaleriaGlobal {
     public id: number,
     public body: string,
     public styles: string,    
-    public f_registro: string // o Date si lo manejas como objeto Date
+    public f_registro: string, // o Date si lo manejas como objeto Date
+    public columnas_permitidas: number,
+    public columnas_permitidas_movil: number,
   ) {}
 }
 
@@ -14,28 +16,8 @@ export class GaleriaContent {
     public status: string,
     public id_user: number,
     public id_global: number,
+    public f_registro: string, // o Date si lo manejas como objeto Date
     public text_alternativo: string,
     public orden: number,
-  ) {}
-}
-
-export class GaleriaImg {
-  constructor(
-    public id: number,
-    public titulo: string,
-    public alt_text: string,
-    public url_imagen: string,
-    public orden: number,
-    public f_registro: string,
-    public categoria_id: number,
-  ) {}
-}
-
-export class GaleriaImgCategorias {
-  constructor(
-    public id: number,
-    public nombre: string,
-    public description: string,    
-    public f_registro: string // o Date si lo manejas como objeto Date
   ) {}
 }
