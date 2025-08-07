@@ -177,6 +177,14 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="mb-3">
+                                    <label for="id_global" class="form-label">Global</label>
+                                    <select class="form-select" id="id_global" formControlName="id_global" aria-label="select option encabezado">
+                                        <option *ngFor="let item of dataFooterGlobal" value="{{item.id}}">{{item.desc_empresa}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
                                     <label for="nombre" class="form-label">Encabezado</label>
                                     <input type="text" class="form-control" id="nombre" formControlName="nombre">
                                 </div>
@@ -255,6 +263,14 @@
                     <div class="modal-body">
                         <input type="hidden" formControlName="id" id="id">
                         <div class="row">
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="id_global" class="form-label">Global</label>
+                                    <select class="form-select" id="id_global" formControlName="id_global" aria-label="select option encabezado">
+                                        <option *ngFor="let item of dataFooterGlobal" value="{{item.id}}">{{item.desc_empresa}}</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Encabezado</label>

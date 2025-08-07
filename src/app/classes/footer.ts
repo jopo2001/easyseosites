@@ -19,6 +19,7 @@ export class FooterEncabezados {
     public f_registro: string,
     public id_user: number,
     public orden: number,
+    public id_global: number,
   ) {}
 }
 

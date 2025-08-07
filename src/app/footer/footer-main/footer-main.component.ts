@@ -54,6 +54,7 @@ export class FooterMainComponent {
       nombre: '',
       status: '',
       orden: '',
+      id_global: '',
       id_user: [1] // Puedes cambiarlo si usas auth
     });
 
@@ -62,6 +63,7 @@ export class FooterMainComponent {
       nombre: '',
       status: '',
       orden: '',
+      id_global: '',
       id_user: [1] // Puedes cambiarlo si usas auth
     });
 
@@ -95,7 +97,7 @@ export class FooterMainComponent {
     this.gralService.getFooterGlobal().subscribe({
       next: (data) => {
         this.dataFooterGlobal = data;
-      },
+      },      
       error: (err) => {
         console.error('Error cargando datos del footer global:', err);
       },
@@ -256,10 +258,10 @@ export class FooterMainComponent {
     this.gralService.getFooterEncabezado().subscribe({
       next: (data) => {
         this.dataFooterEncabezado = data;
-        let last_item = data[0];
+        let item = data[0];
         
         this.formFooterEncabezados.patchValue({                    
-          orden: Number(last_item.orden) + 1,
+          orden: Number(item.orden) + 1,
         });
 
       },
@@ -285,6 +287,7 @@ export class FooterMainComponent {
       nombre: item.nombre,
       orden: item.orden,
       status: status,
+      id_global: item.id_global,
     });
   }
 
