@@ -75,6 +75,15 @@ export class GaleriaMainComponent {
       this.gralService.getGaleriaGlobal().subscribe({
         next: (data) => {
           this.dataGaleriaGlobal = data;
+          let item = data[0];
+
+          if (item.id) {              
+              this.formGaleriaContent.patchValue({
+              id_global: Number(item.id),
+            });  
+          }
+
+
         },
         error: (err) => {
           console.error('Error cargando datos del footer global:', err);
@@ -207,18 +216,24 @@ export class GaleriaMainComponent {
       });
     }
 
-
     loadGaleriaContent(): void {
       this.gralService.getGaleriaContent().subscribe({
-        next: (data) => {
-          this.dataGaleriaContent = data;
+        next: (data) => {          
+          this.dataGaleriaContent = data;          
+          
+          let item = data[0];          
 
-          let item = data[0];
-        
-          this.formGaleriaContent.patchValue({
-            id_global: item.id_global,
-            orden: Number(item.orden) + 1,
-          });
+          if (item) {
+            this.formGaleriaContent.patchValue({
+              id_global: item.id_global,
+              orden: Number(item.orden) + 1,
+            });  
+          } else {
+            this.formGaleriaContent.patchValue({              
+              orden: Number(1),
+            });  
+          }
+          
 
         },
         error: (err) => {
@@ -273,7 +288,7 @@ export class GaleriaMainComponent {
       }
   
       this.gralService.createGaleriaContent(formData).subscribe({
-        next: (res) => {
+        next: (res) => {          
 
           this.loadGaleriaContent();
           
@@ -314,11 +329,7 @@ export class GaleriaMainComponent {
         formData.append('img', this.image);
       } else {    
         formData.append('fileInput1', this.logoFile);
-      }      
-
-      formData.forEach((item, key) => {
-        console.log(`${item} - ${key}`);
-      });
+      }
   
       this.gralService.updateGaleriaContent(Number(id), formData).subscribe({
         next: (res) => {
@@ -334,7 +345,7 @@ export class GaleriaMainComponent {
           });
           
           this.formEditGaleriaGlobal.reset();
-
+          
         },
         error: (err) => {
 
@@ -342,9 +353,7 @@ export class GaleriaMainComponent {
             icon: 'error',
             title: 'Error',
             text: 'No se pudo actualizar el contenido.',
-          });
-
-          console.log(err);          
+          });          
 
         },
       });

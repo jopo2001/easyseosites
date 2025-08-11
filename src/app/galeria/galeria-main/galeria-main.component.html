@@ -170,7 +170,7 @@
                 </div>
                 <form [formGroup]="formGaleriaContent" (ngSubmit)="createGaleriaContent()">                                     
                     <div class="modal-body">
-                        <input type="hidden" formControlName="id_global" id="id_global">   
+                        <input type="hidden" formControlName="id_global" id="id_global">
                         <div class="row">
                             <div class="col-12">
                                 <div class="mb-3">
@@ -267,8 +267,8 @@
                 </div>
                 <form [formGroup]="formEditGaleriaContent" (ngSubmit)="updateGaleriaContent()">
                     <div class="modal-body">
-                        <input type="text" formControlName="id" id="id">
-                        <input type="text" formControlName="id_global" id="id_global">
+                        <input type="hidden" formControlName="id" id="id">
+                        <input type="hidden" formControlName="id_global" id="id_global">
                         <div class="row">
                             <div class="col-12">
                                 <div class="mb-3">
@@ -276,7 +276,7 @@
                                     <input class="form-control" type="file" id="img" formControlName="img"
                                         (change)="onFileSelected($event)">
                                 </div>
-                            </div>                            
+                            </div>
                             <div class="col-12 mb-3">
                                 <label class="text_alternativo">Texto alternativo</label>                                
                                     <input type="text" class="form-control" formControlName="text_alternativo"

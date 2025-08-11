@@ -47,6 +47,7 @@ import { BodyScriptsAgregarComponent } from './scripts/body-scripts-agregar/body
 import { BodyScriptsEditarComponent } from './scripts/body-scripts-editar/body-scripts-editar.component';
 import { FooterMainComponent } from './footer/footer-main/footer-main.component';
 import { GaleriaMainComponent } from './galeria/galeria-main/galeria-main.component';
+import { PopupMainComponent } from './popup/popup-main/popup-main.component';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { GaleriaMainComponent } from './galeria/galeria-main/galeria-main.compon
     BodyScriptsEditarComponent,
     FooterMainComponent,
     GaleriaMainComponent,
+    PopupMainComponent,    
     
   ],
   imports: [

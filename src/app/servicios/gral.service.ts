@@ -7,6 +7,7 @@ import { domain } from '../classes/globals';
 import { HeaderGlobal, HeaderMenu, HeaderSubmenu } from '../classes/header';
 import { FooterGlobal, FooterEncabezados, FooterEnlaces, FooterLastOrdenEnlaces } from '../classes/footer';
 import { GaleriaGlobal, GaleriaContent } from '../classes/galeria';
+import { PopUps } from '../classes/popUps';
 import { HttpRequest } from '@angular/common/http';
 import { ScriptsBody, ScriptsHead } from '../classes/scripts_bd';
 
@@ -240,12 +241,6 @@ export class GralService {
     );
   }
 
-  // getLastOrdenGaleriaGlobal(id: number): Observable<GaleriaGlobal> {
-  //   return this.http.get<GaleriaGlobal>(`${this.baseUrl}/get-views/getLastOrdenEnlaces/${id}`).pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
-
   getGaleriaGlobalId(id: number): Observable<GaleriaGlobal> {
     return this.http.get<{ success: boolean; data: GaleriaGlobal }>(`${this.baseUrl}/galeria-global/${id}`).pipe(
       map(response => response.data),
@@ -279,12 +274,6 @@ export class GralService {
     );
   }
 
-  // getLastOrdenGaleriaGlobal(id: number): Observable<GaleriaGlobal> {
-  //   return this.http.get<GaleriaGlobal>(`${this.baseUrl}/get-views/getLastOrdenEnlaces/${id}`).pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
-
   getGaleriaContentId(id: number): Observable<GaleriaContent> {
     return this.http.get<{ success: boolean; data: GaleriaContent }>(`${this.baseUrl}/galeria-content/${id}`).pipe(
       map(response => response.data),
@@ -310,6 +299,40 @@ export class GralService {
       catchError(this.handleError)
     );
   }
+
+  /* POPUPS */
+  getPopUp(): Observable<PopUps[]> {
+    return this.http.get<PopUps[]>(`${this.baseUrl}/pop-ups`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getPopUpId(id: number): Observable<PopUps> {
+    return this.http.get<{ success: boolean; data: PopUps }>(`${this.baseUrl}/pop-ups/${id}`).pipe(
+      map(response => response.data),
+      catchError(this.handleError)
+    );
+  }
+
+  createPopUp(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/pop-ups`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updatePopUp(id: number, formData: FormData): Observable<any> {
+    formData.append('_method', 'PUT'); // override para el backend PHP
+    return this.http.post(`${this.baseUrl}/pop-ups/${id}?_method=PUT`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deletePopUp(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/pop-ups/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
 
   //Scripts Terceros CRUD 
