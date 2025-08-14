@@ -5,7 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { domain } from '../classes/globals';
 import { HeaderGlobal, HeaderMenu, HeaderSubmenu } from '../classes/header';
-import { FooterGlobal, FooterEncabezados, FooterEnlaces, FooterLastOrdenEnlaces } from '../classes/footer';
+import { FooterGlobal, FooterEncabezados, FooterEnlaces, FooterLegal, FooterLastOrdenEnlaces } from '../classes/footer';
 import { GaleriaGlobal, GaleriaContent } from '../classes/galeria';
 import { PopUps } from '../classes/popUps';
 import { HttpRequest } from '@angular/common/http';
@@ -230,6 +230,39 @@ export class GralService {
 
   deleteFooterEnlaces(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/footer-enlaces/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /* FOOTER LEGAL */
+  getFooterLegal(): Observable<FooterLegal[]> {
+    return this.http.get<FooterLegal[]>(`${this.baseUrl}/footer-legal`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getFooterLegalId(id: number): Observable<FooterLegal> {
+    return this.http.get<{ success: boolean; data: FooterLegal }>(`${this.baseUrl}/footer-legal/${id}`).pipe(
+      map(response => response.data),
+      catchError(this.handleError)
+    );
+  }
+
+  createFooterLegal(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/footer-legal`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateFooterLegal(id: number, formData: FormData): Observable<any> {
+    formData.append('_method', 'PUT'); // override para el backend PHP
+    return this.http.post(`${this.baseUrl}/footer-legal/${id}?_method=PUT`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteFooterLegal(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/footer-legal/${id}`).pipe(
       catchError(this.handleError)
     );
   }

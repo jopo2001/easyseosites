@@ -173,16 +173,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form [formGroup]="formFooterEncabezados" (ngSubmit)="createEncabezado()">
+                    <input type="hidden" class="" id="id_global"  formControlName="id_global">
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-12">
+                            <!-- <div class="col-12">
                                 <div class="mb-3">
                                     <label for="id_global" class="form-label">Global</label>
                                     <select class="form-select" id="id_global" formControlName="id_global" aria-label="select option encabezado">
                                         <option *ngFor="let item of dataFooterGlobal" value="{{item.id}}">{{item.desc_empresa}}</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Encabezado</label>
@@ -262,15 +263,16 @@
                 <form [formGroup]="formEditEncabezado" (ngSubmit)="updateEncabezado()">
                     <div class="modal-body">
                         <input type="hidden" formControlName="id" id="id">
+                        <input type="hidden" class="" id="id_global"  formControlName="id_global">
                         <div class="row">
-                            <div class="col-12">
+                            <!-- <div class="col-12">
                                 <div class="mb-3">
                                     <label for="id_global" class="form-label">Global</label>
                                     <select class="form-select" id="id_global" formControlName="id_global" aria-label="select option encabezado">
                                         <option *ngFor="let item of dataFooterGlobal" value="{{item.id}}">{{item.desc_empresa}}</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Encabezado</label>
@@ -339,13 +341,13 @@
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="email" class="form-control" id="nombre"  formControlName="nombre">
+                                    <input type="text" class="form-control" id="nombre"  formControlName="nombre">
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Enlace</label>
+                                    <label for="enlace" class="form-label">Enlace</label>
                                     <input type="text" class="form-control" id="enlace" formControlName="enlace"
                                         placeholder="example /blog/">
                                 </div>
@@ -441,13 +443,13 @@
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="email" class="form-control" id="nombre"  formControlName="nombre">
+                                    <input type="text" class="form-control" id="nombre"  formControlName="nombre">
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Enlace</label>
+                                    <label for="enlace" class="form-label">Enlace</label>
                                     <input type="text" class="form-control" id="enlace" formControlName="enlace"
                                         placeholder="example /blog/">
                                 </div>
@@ -455,6 +457,174 @@
 
                             <div class="col-12">
                                 <label class="form-label">Orden</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-sort-numeric-down"></i></span>
+                                    <input type="number" class="form-control" formControlName="orden"
+                                        placeholder="Ej: 1, 2, 3">
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-check form-switch mt-3">
+                                    <input class="form-check-input" type="checkbox" id="status" formControlName="status" checked>
+                                    <label class="form-check-label" for="status">Activo</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- LEGAL  -->
+<div class="card p-3 mb-3 max-h-25 overflow-y-scroll">
+    <div class="d-flex align-items-center justify-content-between px-2 sticky-top bg-white rounded-2 shadow-sm">
+        <h2><i class="fa-solid fa-plus text-primary me-2"></i>Footer Legal</h2>
+        <button type="button" class="btn btn-primary my-2 me-md-2" data-bs-toggle="modal"
+            data-bs-target="#createLegalModal">
+            Agregar enlace
+        </button>
+    </div>
+
+    <!-- modal  create enlace-->
+    <div class="modal fade" id="createLegalModal" tabindex="-1" aria-labelledby="createLegalModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form [formGroup]="formFooterLegal" (ngSubmit)="createLegal()">
+                    <input type="hidden" class="" id="id_global"  formControlName="id_global">
+                    <div class="modal-body">
+                        <div class="row">   
+                            
+                            <!-- <div class="mb-3 col-12">
+                                <label for="id_global" class="form-label">Global</label>
+                                <select class="form-select" id="id_global" formControlName="id_global" aria-label="select option encabezado">
+                                    <option *ngFor="let item of dataFooterGlobal" value="{{item.id}}">{{item.desc_empresa}}</option>
+                                </select>
+                            </div> -->
+
+                            <div class="mb-3 col-12">
+                                <label for="titulo" class="form-label">Titulo</label>
+                                <input type="text" class="form-control" id="titulo"  formControlName="titulo">
+                            </div>                            
+                            
+                            <div class="mb-3 col-12">
+                                <label for="enlace" class="form-label">Enlace</label>
+                                <input type="text" class="form-control" id="enlace" formControlName="enlace"
+                                    placeholder="example /legal/terminos-y-condiciones">
+                            </div>                            
+                            
+                            <div class="col-12">
+                                <label class="form-label" for="orden">Orden</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-sort-numeric-down"></i></span>
+                                    <input type="number" class="form-control" formControlName="orden"
+                                        placeholder="Ej: 1, 2, 3">
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-check form-switch mt-3">
+                                    <input class="form-check-input" type="checkbox" id="status" formControlName="status" checked>
+                                    <label class="form-check-label" for="status">Activo</label>
+                                </div>
+                            </div>
+
+                        </div>                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Crear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- table -->
+    <div class="row col-12 overflow-x-scroll">
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">enlace</th>
+                    <th scope="col">Estatus</th>
+                    <th scope="col">Orden</th>
+                    <th scope="col">
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dataFooterLegal">
+                    <td>{{ item.titulo }}</td>
+                    <td>{{ item.enlace }}</td>
+                    <td>{{ item.status }}</td>
+                    <td>{{ item.orden }}</td>
+                    <td>
+                        <div>
+                            <!-- Button trigger modal -->
+                            <button type="button" (click)="editLegal(item)" class="btn btn-primary my-2 me-md-2"
+                                data-bs-toggle="modal" data-bs-target="#footerLegalModal">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" (click)="eliminarLegal(item.id)">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="footerLegalModal" tabindex="-1" aria-labelledby="footerLegalModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form [formGroup]="formEditLegal" (ngSubmit)="updateLegal()">
+                    <div class="modal-body">
+                        <input type="hidden" formControlName="id" id="id">
+                        <input type="hidden" class="" id="id_global"  formControlName="id_global">
+                        <div class="row">
+
+                            <!-- <div class="mb-3 col-12">
+                                <label for="id_global" class="form-label">Global</label>
+                                <select class="form-select" id="id_global" formControlName="id_global" aria-label="select option encabezado">
+                                    <option *ngFor="let item of dataFooterGlobal" value="{{item.id}}">
+                                        {{item.desc_empresa}}
+                                    </option>
+                                </select>
+                            </div> -->
+
+                            <div class="mb-3 col-12">
+                                <label for="titulo" class="form-label">Titulo</label>
+                                <input type="text" class="form-control" id="titulo"  formControlName="titulo">
+                            </div>                            
+                            
+                            <div class="mb-3 col-12">
+                                <label for="enlace" class="form-label">Enlace</label>
+                                <input type="text" class="form-control" id="enlace" formControlName="enlace"
+                                    placeholder="example /legal/terminos-y-condiciones">
+                            </div>                            
+                            
+                            <div class="col-12">
+                                <label class="form-label" for="orden">Orden</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fa-solid fa-sort-numeric-down"></i></span>
                                     <input type="number" class="form-control" formControlName="orden"

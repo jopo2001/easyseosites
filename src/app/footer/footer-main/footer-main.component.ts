@@ -4,7 +4,7 @@ import { GralService } from '../../servicios/gral.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { domain } from '../../classes/globals';
 import { Router } from '@angular/router';
-import { FooterEncabezados, FooterEnlaces, FooterGlobal, FooterLastOrdenEnlaces } from '../../classes/footer';
+import { FooterEncabezados, FooterEnlaces, FooterGlobal, FooterLegal } from '../../classes/footer';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,8 +19,6 @@ export class FooterMainComponent {
   formEditGlobal: FormGroup;
   dataFooterGlobal: FooterGlobal[] = [];
 
-  mostrarFormularioAgregar = false;
-
   formFooterEncabezados: FormGroup;  
   formEditEncabezado: FormGroup;
   dataFooterEncabezado: FooterEncabezados[] = [];
@@ -28,6 +26,11 @@ export class FooterMainComponent {
   formFooterEnlaces: FormGroup;
   formEditEnlaces: FormGroup;
   dataFooterEnlaces: FooterEnlaces[] = [];  
+
+
+  formFooterLegal: FormGroup;
+  formEditLegal: FormGroup;
+  dataFooterLegal: FooterLegal[] = [];  
 
   constructor(
     private fb: FormBuilder,
@@ -85,18 +88,55 @@ export class FooterMainComponent {
       status: '',
       id_user: [1] // Puedes cambiarlo si usas auth
     });
+
+    this.formFooterLegal = this.fb.group({
+      titulo: '',      
+      enlace: '',
+      status: '',
+      id_user: [1], // Puedes cambiarlo si usas auth
+      orden: '',
+      id_global: '',
+    });
+
+    this.formEditLegal = this.fb.group({
+      id: '',
+      titulo: '',      
+      enlace: '',
+      status: '',
+      id_user: [1], // Puedes cambiarlo si usas auth
+      orden: '',
+      id_global: '',
+    });
   }
 
   ngOnInit() {
     this.loadFooterGlobal();
-    this.loadEncabezado();
-    this.loadEnlaces();
   }
 
-  loadFooterGlobal(): void {
+  id_footer_global_activo = 0;
+  loadFooterGlobal(): void {    
     this.gralService.getFooterGlobal().subscribe({
       next: (data) => {
-        this.dataFooterGlobal = data;
+
+        data.forEach(element => {
+          if (element.status === 'Activo') {
+            this.id_footer_global_activo = element.id
+          }          
+        });
+
+        this.dataFooterGlobal = data;        
+
+        this.loadEncabezado();
+        this.loadLegal();
+
+        this.formFooterEncabezados.patchValue({
+          id_global: this.id_footer_global_activo
+        });
+
+        this.formFooterLegal.patchValue({
+          id_global: this.id_footer_global_activo
+        });
+
       },      
       error: (err) => {
         console.error('Error cargando datos del footer global:', err);
@@ -152,6 +192,9 @@ export class FooterMainComponent {
     this.gralService.createFooterGlobal(formData).subscribe({
       next: (res) => {
         this.loadFooterGlobal();
+        this.loadEncabezado();
+        this.loadEnlaces();
+        this.loadLegal();
 
         Swal.fire({
           icon: 'success',
@@ -174,7 +217,6 @@ export class FooterMainComponent {
   }
 
   updateGlobal() {
-    // const id = this.route.snapshot.paramMap.get('id');
     const formData = new FormData();
 
     const footerGlobalModel = {
@@ -253,16 +295,33 @@ export class FooterMainComponent {
   }
 
   /* ENCABEZADO */
-
   loadEncabezado(): void {
     this.gralService.getFooterEncabezado().subscribe({
       next: (data) => {
-        this.dataFooterEncabezado = data;
-        let item = data[0];
         
-        this.formFooterEncabezados.patchValue({                    
-          orden: Number(item.orden) + 1,
-        });
+        const filtrados = data.filter(item => Number(item.id_global) == this.id_footer_global_activo);
+ 
+
+        if (filtrados.length > 0) {
+
+          // Obtener el mayor valor de orden
+          const maxOrden = Math.max(...filtrados.map(f => Number(f.orden) || 0));
+
+          this.formFooterEncabezados.patchValue({ // selecciona el ultimo valor de orden y le suma 1
+            orden: maxOrden + 1,
+          });
+
+        } else {
+          
+          this.formFooterEncabezados.patchValue({ // si no hay valores por defecto es el 1.
+            orden: 1,
+          });
+
+        }
+
+        this.dataFooterEncabezado = filtrados;
+
+        this.loadEnlaces();
 
       },
       error: (err) => {
@@ -304,6 +363,7 @@ export class FooterMainComponent {
     this.gralService.createFooterEncabezado(formData).subscribe({
       next: (res) => {
         this.loadEncabezado();
+        this.loadEnlaces();
 
         Swal.fire({
           icon: 'success',
@@ -341,7 +401,8 @@ export class FooterMainComponent {
 
     this.gralService.updateFooterEncabezado(Number(id), formData).subscribe({
       next: (res) => {
-        this.loadEncabezado();
+        this.loadFooterGlobal()
+        this.loadEncabezado();        
 
         Swal.fire({
           icon: 'success',
@@ -400,7 +461,7 @@ export class FooterMainComponent {
 
 
   /* ENLACES */
-  onEncabezadoChange(id: string) {
+  onEncabezadoChange(id: string) { // cuando cambian el valor del campo select cambia el numero de orden dependiendo el encabezado
       if (id) {
 
         this.gralService.getLastOrdenEnlaces(Number(id)).subscribe((items) => {
@@ -425,10 +486,20 @@ export class FooterMainComponent {
   loadEnlaces(): void {
     this.gralService.getFooterEnlaces().subscribe({
       next: (data) => {
-        this.dataFooterEnlaces = data;                
-        this.formFooterEnlaces.patchValue({                    
-          orden: Number(1),
-        });
+        
+        const idsEncabezados = this.dataFooterEncabezado.map(e => e.id);        
+
+        const filtrados = data.filter(item => idsEncabezados.includes(item.id_column_encabezado));        
+
+        if (filtrados.length == 0) {
+          this.formFooterEnlaces.patchValue({ // si no hay valores por defecto es el 1.
+            orden: 1,
+          });
+        }
+        
+        this.dataFooterEnlaces = filtrados;
+        
+
       },
       error: (err) => {
         console.error('Error cargando datos del footer global:', err);
@@ -542,6 +613,168 @@ export class FooterMainComponent {
         this.gralService.deleteFooterEnlaces(id).subscribe({
           next: () => {
             this.loadEnlaces();
+            Swal.fire({
+              icon: 'success',
+              title: 'Eliminado',
+              text: 'Se ha eliminado con exito.',
+              timer: 2000,
+              showConfirmButton: false,
+            });
+          },
+          error: (err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'No se pudo eliminar el contenido.',
+            });
+          },
+        });
+      }
+    });
+  }
+
+  /* LEGAL */
+  loadLegal(): void {
+    this.gralService.getFooterLegal().subscribe({
+      next: (data) => {        
+
+        const filtrados = data.filter(item => Number(item.id_global) == this.id_footer_global_activo);
+
+        if (filtrados.length > 0) {
+
+          // Obtener el mayor valor de orden
+          const maxOrden = Math.max(...filtrados.map(f => Number(f.orden) || 0));
+
+          this.formFooterLegal.patchValue({ // selecciona el ultimo valor de orden y le suma 1
+            orden: maxOrden + 1,
+          });
+
+        } else {
+          
+          this.formFooterLegal.patchValue({ // si no hay valores por defecto es el 1.
+            orden: 1,
+          });
+
+        }
+
+        this.dataFooterLegal = filtrados;
+
+      },
+      error: (err) => {
+        console.error('Error cargando datos del footer legal:', err);
+      },
+    });
+  }
+
+  editLegal(item: any) {
+
+    let status = null;
+
+    if (item.status == 'Activo') {
+      status = 1
+    } else {
+      status = 0;
+    }
+
+    // Si tienes un formulario reactivo, rellena los valores:
+    this.formEditLegal.patchValue({
+      id: item.id,
+      titulo: item.titulo,      
+      enlace: item.enlace,
+      status: status,
+      id_user: [1], 
+      orden: item.orden,
+      id_global: item.id_global,
+    });
+
+  }
+
+  createLegal() {
+    const formData = new FormData();
+
+    const formFooterLegal = {
+      ...this.formFooterLegal.value,
+      status: this.formFooterLegal.value.status ? 'Activo' : 'Inactivo',      
+    };    
+
+    formData.append('footerLegalModel', JSON.stringify(formFooterLegal));
+
+    this.gralService.createFooterLegal(formData).subscribe({
+      next: (res) => {  
+        this.loadLegal();
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Creado',
+          text: 'Creado con exito.',
+          timer: 2000,
+          showConfirmButton: false,
+        });
+
+        this.formFooterLegal.reset(); //
+      },
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo crear el contenido.',
+        });
+      },
+    });
+  }
+
+  updateLegal() {
+    const formData = new FormData();
+
+    const formEditLegal = {
+      ...this.formEditLegal.value,
+      status: this.formEditLegal.value.status ? 'Activo' : 'Inactivo',
+    };
+
+    formData.append('footerLegalModel', JSON.stringify(formEditLegal));
+
+    const id = this.formEditLegal.value.id;    
+
+    this.gralService.updateFooterLegal(Number(id), formData).subscribe({
+      next: (res) => {
+        this.loadFooterGlobal();
+        this.loadLegal();
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Actualizado',
+          text: 'Actualizado con exito.',
+          timer: 2000,
+          showConfirmButton: false,
+        });
+
+        this.formEditLegal.reset(); //
+      },
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo actualizar el contenido.',
+        });
+      },
+    });
+  }
+
+  eliminarLegal(id: number): void {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará el dato permanentemente.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.gralService.deleteFooterLegal(id).subscribe({
+          next: () => {
+            this.loadLegal();
             Swal.fire({
               icon: 'success',
               title: 'Eliminado',

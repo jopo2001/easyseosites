@@ -45,7 +45,8 @@ export class FooterLegal {
     public status: string,    
     public id_user: number,
     public f_registro: string,
-    public orden: number,    
+    public orden: number,  
+    public id_global: number,
   ) {}
 }
 
